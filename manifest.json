@@ -1,7 +1,7 @@
 {
   "name": "Fairphone spring 2026 github",
-  "author": "Zendesk",
-  "version": "4.3.6",
+  "author": "gaetan.janssens@fairphone.com",
+  "version": "0.0.1",
   "api_version": 4,
   "default_locale": "en-us",
   "settings": [
