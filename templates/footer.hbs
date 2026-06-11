@@ -1,25 +1,257 @@
-<footer class="footer">
-  <div class="footer-inner">
-    {{#link 'help_center'}}{{help_center.name}}{{/link}}
+<!-- ============================================================
+  PRODUCTION TEMPLATE: footer.hbs
+  Source: actual_theme/templates/footer.hbs
+  ============================================================ -->
 
-    <div class="footer-language-selector">
-      {{#if alternative_locales}}
-        <div class="dropdown language-selector">
-          <button class="dropdown-toggle" aria-haspopup="true">
-            {{current_locale.name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </button>
-          <span class="dropdown-menu dropdown-menu-end" role="menu">
-            {{#each alternative_locales}}
-              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
-                {{name}}
-              </a>
-            {{/each}}
-          </span>
+<!-- REMOVED FROM COPENHAGEN: footer with help_center.name link and language-selector dropdown -->
+
+<!-- ADDED FROM PRODUCTION: Commented-out inactive footer banner text -->
+
+      <!-- uncomment for inactive footer banner text:
+
+  <div class="centered-text">
+      <p>We're working hard to provide you with a better support experience! The chat service is temporarily closed until the end of June while we grow our team, make structural improvements, and address long response times due to limited capacity. We're confident you'll see real improvements very soon, and we truly appreciate your patience during this time. 
+</p>
+	</div>
+-->
+<!-- ADDED FROM PRODUCTION: Commented-out search popover navigation duplicate -->
+<!-- 
+<div class="c-search-popover" data-search="" style="fixed"><div class="c-search-popover__main"><div class="c-search-popover__header"> <button class="c-nav__toggle"></button><h1 class="c-logo"> <a class="c-logo__link" href="https://www.fairphone.com/en/"> <span>Fairphone</span> </a></h1> </div><div class="c-search-popover__contents"><ul class="c-search-popover-nav "><li class="c-search-popover-nav__item  c-search-popover-nav__item--parent  c-search-popover-nav__link  c-search-popover-nav__item--4 "><a href="https://shop.fairphone.com/" class="c-search-popover-nav__link">Phone</a></li><li class="c-search-popover-nav__item  c-search-popover-nav__link"><a href="https://www.fairphone.com/en/our-goals/" class="c-search-popover-nav__link">Story</a></li><li class="c-search-popover-nav__item  c-search-popover-nav__item--parent  c-search-popover-nav__link  c-search-popover-nav__item--40 "><a href="https://www.fairphone.com/en/community/" class="c-search-popover-nav__link">Community</a></li><li class="c-search-popover-nav__item  c-search-popover-nav__item--parent  c-search-popover-nav__item--active  c-search-popover-nav__item--parent-active  c-search-popover-nav__item--ancestor-active  c-search-popover-nav__link  c-search-popover-nav__item--5 has-blog page_item page-item-2 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor"><a href="https://support.fairphone.com/" class="c-search-popover-nav__link">Support</a></li></ul><div class="c-search-popover__line"></div><ul class="c-search-popover-langs"><li class="c-search-popover-langs__item"> <a href="https://www.fairphone.com/de/" class="c-search-popover-langs__link "> Deutsch </a></li><li class="c-search-popover-langs__item"> <a href="https://www.fairphone.com/it/" class="c-search-popover-langs__link "> Italiano </a></li><li class="c-search-popover-langs__item"> <a href="https://www.fairphone.com/en/" class="c-search-popover-langs__link c-search-popover-langs__link--active"> English </a></li><li class="c-search-popover-langs__item"> <a href="https://www.fairphone.com/nl/" class="c-search-popover-langs__link "> Nederlands </a></li><li class="c-search-popover-langs__item"> <a href="https://www.fairphone.com/fr/" class="c-search-popover-langs__link "> Français </a></li><li class="c-search-popover-langs__item"> <a href="https://www.fairphone.com/es/" class="c-search-popover-langs__link "> Español </a></li></ul> <a class="c-search-popover__lang" href="https://www.fairphone.com/languagegateway/"> <span class="flag flag-gb u-small-mrs"></span> English </a><div class="c-search-popover__line"></div><a class="o-button c-search-popover__login" href="https://shop.fairphone.com/customer/account/login/"> Login </a></div></div></div> -->
+
+<!-- ADDED FROM PRODUCTION: Full custom Fairphone footer with navigation menus -->
+<footer class="c-footer" data-footer="">
+    <div class="row">
+
+        <div class="column" data-equalizer-watch="" >
+            <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-6 menus">
+                <li class="c-simple-nav__item  c-simple-nav__item--parent  c-simple-nav__link  c-simple-nav__item--20502 "><a href="#?ref=footer" class="c-simple-nav__link">Products</a>
+                    <ul class="c-simple-nav__sub-menu c-simple-nav__sub-menu--1">
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--86880 "><a href="https://shop.fairphone.com/fairphone-5" class="c-simple-nav__link">Fairphone 5</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--94515 "><a href="https://shop.fairphone.com/fairphone-5-e-operating-system" class="c-simple-nav__link">Fairphone 5 with /e/os</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--72640 "><a href="https://shop.fairphone.com/fairbuds" class="c-simple-nav__link">Fairbuds</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--72640 "><a href="https://shop.fairphone.com/en/fairbuds-xl" class="c-simple-nav__link">Fairbuds XL</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20521 "><a href="https://shop.fairphone.com/spare-parts" class="c-simple-nav__link">Spare Parts</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20522 "><a href="https://shop.fairphone.com/accessories" class="c-simple-nav__link">Accessories</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--35081 "><a href="https://shop.fairphone.com/shop/gift-card-8#attr=" class="c-simple-nav__link">Gift Card</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--55759 "><a href="https://shop.fairphone.com/where-to-buy" class="c-simple-nav__link">Where to buy</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--55759 "><a href="https://shop.fairphone.com/promotions" class="c-simple-nav__link">Promotions</a></li>
+                    </ul>
+                </li>
+                <li class="c-simple-nav__item  c-simple-nav__item--parent  c-simple-nav__link  c-simple-nav__item--21710 "><a href="#?ref=footer" class="c-simple-nav__link">Services</a>
+                    <ul class="c-simple-nav__sub-menu c-simple-nav__sub-menu--1">
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--55616 "><a href="https://shop.fairphone.com/recycle" class="c-simple-nav__link">Reuse and Recycle Program</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--88849 "><a href="https://shop.fairphone.com/keep-club-fairphone" class="c-simple-nav__link">Keep Club</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--88848 "><a href="https://shop.fairphone.com/keep-club-fairphone-referral" class="c-simple-nav__link">Refer a friend</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--94237 "><a href="https://shop.fairphone.com/en/getting-started" class="c-simple-nav__link">Getting started</a></li>
+                    </ul>
+                </li>
+                <li class="c-simple-nav__item  c-simple-nav__item--parent  c-simple-nav__link  c-simple-nav__item--21709 "><a href="#?ref=footer" class="c-simple-nav__link">Business</a>
+                    <ul class="c-simple-nav__sub-menu c-simple-nav__sub-menu--1">
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--94787 "><a href="https://shop.fairphone.com/business" class="c-simple-nav__link">Business solutions</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--56918 "><a href="https://shop.fairphone.com/en/fairphone-for-business-resellers" class="c-simple-nav__link">Fairphone business resellers</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--83438 "><a href="https://shop.fairphone.com/aer" class="c-simple-nav__link">Android Enterprise</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--83439 "><a href="https://fairphone.com/en/sales-partner" class="c-simple-nav__link">Become a sales partner</a></li>
+                    </ul>
+                </li>
+                <li class="c-simple-nav__item  c-simple-nav__item--parent  c-simple-nav__link  c-simple-nav__item--21711 "><a href="#?ref=footer" class="c-simple-nav__link">Fairphone</a>
+                    <ul class="c-simple-nav__sub-menu c-simple-nav__sub-menu--1">
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--41933 "><a href="https://shop.fairphone.com/about-us" class="c-simple-nav__link">About us</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--37286 "><a href="https://fairphone.com/en/blog" class="c-simple-nav__link">Stories</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--85115 "><a href="https://fairphone.com/en/about/team" class="c-simple-nav__link">Team</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--21023 "><a href="https://fairphone.com/en/about/join-the-team" class="c-simple-nav__link">Vacancies</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20518 "><a href="https://fairphone.com/en/about/press" class="c-simple-nav__link">Press</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--54209 "><a href="https://shop.fairphone.com/software-longevity" class="c-simple-nav__link">Software longevity</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--54209 "><a href="https://fairphone.com/en/open-source" class="c-simple-nav__link">Open Source</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--94579 "><a href="https://shop.fairphone.com/fairphone-e-operating-system" class="c-simple-nav__link">Fairphone & Murena</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--103067 "><a href="https://shop.fairphone.com/black-friday" class="c-simple-nav__link">Black Friday</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--60740 "><a href="https://fairphone.com/en/legal/investors-relations" class="c-simple-nav__link">Investor Relations</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--52245 "><a href="https://fairphone.com/en/legal/impressum" class="c-simple-nav__link">Impressum</a></li>
+                    </ul>
+                </li>
+                <li class="c-simple-nav__item  c-simple-nav__item--parent  c-simple-nav__link  c-simple-nav__item--83435 "><a href="#?ref=footer" class="c-simple-nav__link">Support</a>
+                    <ul class="c-simple-nav__sub-menu c-simple-nav__sub-menu--1">
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20510 "><a href="https://support.fairphone.com/hc/en-us" class="c-simple-nav__link">Customer Support</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20508 "><a href="https://support.fairphone.com/hc/en-us/categories/115000331883" class="c-simple-nav__link">My order</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20951 "><a href="https://shop.fairphone.com/contact" class="c-simple-nav__link">Contact</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--58642 "><a href="https://fairphone.com/en/legal/fairphone-returns-policy" class="c-simple-nav__link">Return Policy</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--20509 "><a href="https://support.fairphone.com/hc/en-us/articles/17121765976849" class="c-simple-nav__link">Shipping</a></li>
+                        <li class="c-simple-nav__sub-menu-item c-simple-nav__sub-menu--1__item  c-simple-nav__link  c-simple-nav__item--55404 "><a href="https://shop.fairphone.com/warranty" class="c-simple-nav__link">Warranty</a></li>
+                    </ul>
+                </li>
+                <li class="c-simple-nav__item c-simple-nav__item--parent c-simple-nav__link">
+                    <a class="c-simple-nav__link" href="#?">Connect</a>
+                    <ul class="c-simple-nav__sub-menu">
+                        <li>
+                            <a target="_blank" href="https://forum.fairphone.com">Forum</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.youtube.com/user/Fairphone">
+                                YouTube
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.instagram.com/fairphone/">
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://facebook.com/fairphone">
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.linkedin.com/company/fairphone/">
+                                LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="c-footer__inline-list">
+                <li>
+                    <ul>
+                        <li class="c-footer__list-item">
+                            <a class=" c-footer__list-link--linkedin" href="https://www.linkedin.com/company/fairphone/">
+                            </a>
+                        </li>
+                        <li class="c-footer__list-item">
+                            <a class=" c-footer__list-link--instagram" href="https://www.instagram.com/fairphone/">
+                            </a>
+                        </li>
+                        <li class="c-footer__list-item">
+                            <a class=" c-footer__list-link--facebook" href="https://facebook.com/fairphone">
+                            </a>
+                        </li>
+                        <li class="c-footer__list-item">
+                            <a class=" c-footer__list-link--youtube" href="https://www.youtube.com/user/Fairphone">
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="c-footer__inline-list-item">
+                    <a class="c-footer__inline-list-link" href="https://fairphone.com/en/legal/terms-and-conditions-for-fairphone-website-usage/">
+                        Terms and Conditions                        </a>
+                </li>
+                <li class="c-footer__inline-list-item">
+                    <a class="c-footer__inline-list-link" href="https://www.fairphone.com/en/legal/fairphone-privacy-policy/">
+                        Privacy and Cookie Policy                       </a>
+                </li>
+                <li class="c-footer__inline-list-item">
+                    <a class="c-footer__inline-list-link" href="https://www.fairphone.com/en/legal/impressum">
+                        Impressum                       </a>
+                </li>
+                <li class="c-footer__inline-list-item copyright">
+                    © Fairphone 2025                    </li>
+            </ul>
         </div>
-      {{/if}}
     </div>
-  </div>
-</footer>
+
+</footer>    
+
+
+
+<!-- ADDED FROM PRODUCTION: Zendesk chat snippet -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=7008ae9f-e7fc-451a-9f39-3c89f8907cac"></script>
+
+<!-- ADDED FROM PRODUCTION: Bootstrap JS library -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<!-- ADDED FROM PRODUCTION: Zendesk conditional fields app -->
+<script src="https://assets.zendesk.com/assets/apps/conditional_fields/latest/helpcenter.js"></script>
+<!-- ADDED FROM PRODUCTION: Conditional fields rules configuration -->
+<script>var cfaRules = [{"fieldType":"tagger","field":25210943,"value":"about_product_problem","select":[25287926,360000140026],"formId":92946,"requireds":[25287926]},{"fieldType":"tagger","field":25210943,"value":"about_product_return","select":[25287926],"formId":92946,"requireds":[25287926]},{"fieldType":"tagger","field":25210943,"value":"about_product_update","select":[25287926],"formId":92946,"requireds":[25287926]},{"fieldType":"tagger","field":25287946,"value":"about_product","select":[25210943,25448966,25448946],"formId":92946,"requireds":[25210943,25448966]},{"fieldType":"tagger","field":25448966,"value":"fairphone_webshop","select":[24990886],"formId":92946,"requireds":[]},{"fieldType":"tagger","field":25448966,"value":"other_shop","select":[360000056043],"formId":92946,"requireds":[]}];</script>
+
+<!-- ADDED FROM PRODUCTION: Fairphone custom application JS -->
+<script src="{{asset "fairphone.app.js"}}"></script>
+<!-- ADDED FROM PRODUCTION: Ivaldi legacy script -->
+<script src="{{asset 'ivaldi.js'}}"></script>
+
+
+<!-- ADDED FROM PRODUCTION: Custom initialization and interaction scripts -->
+<script>
+    $(document).ready(function() {
+      Fairphone().start();
+    });
+
+    window.addEventListener('DOMContentLoaded', function(){
+      var ZingtreeFrame = document.querySelector('iframe[src*="https://zingtree.com/deploy/tree.php"]'); 
+      var getQueryVariable = function(variable) {
+        var query = document.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable) {
+            return pair[1];
+          }
+        }
+        return '';
+      };
+      if( ZingtreeFrame ) {
+          ZingtreeFrame.onload = function() {
+            if( getQueryVariable('session_id') != '' ) {
+              ZingtreeFrame.contentWindow.postMessage({
+                message: 'FP_ZINGTREE',
+                session_id: getQueryVariable('session_id'),
+                success: getQueryVariable('success')
+              },"*");
+            }
+        }
+      }
+    });
+
+    window.addEventListener('message', event => {
+      if(event.data.message && event.data.message == 'Successful submission'){
+        history.replaceState(
+          {},
+          document.title,
+          top.window.location.href +
+            '&success=true'
+        );
+        window.location.replace(event.data.redirect);
+      }
+    });
+
+    //zE('messenger', 'hide');
+
+    console.log('Script starting...');
+
+  document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, looking for chat button...');
+
+      const chatButton = document.getElementById('chat-with-fairphone');
+      console.log('Chat button search result:', chatButton);
+
+      if (chatButton) {
+          console.log('Chat button found! Adding event listener...');
+
+          chatButton.addEventListener('click', function(e) {
+              console.log('BUTTON CLICKED!');
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (typeof zE !== 'undefined') {
+                  console.log('Opening Zendesk...');
+                  zE('messenger', 'show');
+                  zE('messenger', 'open');
+              } else {
+                  console.log('zE not available');
+              }
+          });
+
+          console.log('Event listener added successfully');
+      } else {
+          console.log('ERROR: Chat button not found!');
+      }
+  });
+
+  console.log('Script loaded');
+</script>
+  <!-- ADDED FROM PRODUCTION: Commented-out Google Translate widget -->
+<!-- <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
+-->

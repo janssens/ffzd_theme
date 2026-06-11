@@ -1,132 +1,133 @@
-<div class="container-divider"></div>
-<div class="container">
-   <div class="sub-nav">
-    {{breadcrumbs}}
-    <div class="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-      </svg>
-      {{search scoped=settings.scoped_community_search submit=false}}
-    </div>
-  </div>
+{{!--
+  PRODUCTION TEMPLATE: community_topic_page.hbs
+  Source: actual_theme/templates/community_topic_page.hbs
 
-  <header class="page-header">
-    <h1>
-      {{topic.name}}
-      {{#if topic.internal}}
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
-          <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
-          <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
-        </svg>
-      {{/if}}
-    </h1>
-    <span class="post-to-community">
-      {{link 'new_post' topic_id=topic.id class='button button-large'}}
-    </span>
-  </header>
-  <div class="community-header">
-    <p class="page-header-description">{{topic.description}}</p>
-    {{#if settings.show_follow_topic}}
-      <div class="community-follow">
+  REMOVED FROM COPENHAGEN:
+  - container-divider and container wrapper with breadcrumbs and scoped search
+  - page-header with topic name, internal icon, new_post button
+  - community-header with description, subscribe
+  - topic-header with filters and sorters dropdowns
+  - posts-list with striped-list items (SVG icons, status labels, meta, vote/comment counts)
+  - community-footer section
+
+  ADDED FROM PRODUCTION:
+  - Custom sub-nav with community heading and scoped search
+  - Custom community-nav with topics, posts, new_post links
+  - Topic header with internal icon, name, follower count, subscribe
+  - Topic description
+  - Commented-out post status filter snippet
+  - Custom community-sub-nav with sorters
+  - Custom question-list with posts (title, author, date, votes, comments, status)
+  - Pagination
+--}}
+
+<nav class="sub-nav clearfix">
+  <h4 class="community-heading">{{t 'community'}}</h4>
+  {{search scoped=true}}
+</nav>
+
+<nav class="community-nav">
+  <ul>
+    <li>{{link 'topics'}}</li>
+    <li>{{link 'posts'}}</li>
+    <li>{{link 'new_post' role='button' topic_id=topic.id}}</li>
+  </ul>
+</nav>
+
+<div class="clearfix">
+  <div class="main-column">
+
+    <header class="topic-header">
+      <h1 class="topic-heading">
+        {{#if topic.internal}}
+          <span class="visibility-internal" data-title="{{t 'internal'}}">
+            <span class="visibility-internal-icon"></span>
+          </span>
+        {{/if}}
+        {{topic.name}}
+      </h1>
+      <span class="topic-meta">
+        {{t 'follower_count' count=topic.follower_count}}
+      </span>
+      <span>
         {{subscribe}}
-      </div>
-    {{/if}}
-  </div>
+      </span>
+    </header>
 
-  <div class="topic-header">
-    <span class="topic-filters">
-      <span class="dropdown">
-        <button class="dropdown-toggle" aria-haspopup="true">
-          {{current_filter.label}}
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-          </svg>
-        </button>
-        <span class="dropdown-menu" role="menu">
-          {{#each filters}}
-            <a href="{{url}}" aria-checked="{{selected}}" role="menuitemradio">
-              {{name}}
-            </a>
-          {{/each}}
+    <p class="topic-description">{{topic.description}}</p>
+
+    <section class="topic-questions">
+
+      {{!--
+      ** NEW COMMUNITY SNIPPET **
+      Please uncomment these lines if you want to allow your users to filter posts by status
+      <span class="topic-filters">
+        <span class="dropdown">
+          <span class="dropdown-toggle">
+            {{current_filter.label}}
+          </span>
+          <span class="dropdown-menu" role="menu">
+            {{#each filters}}
+              <a href="{{url}}" aria-selected="{{selected}}" role="menuitem">
+                {{name}}
+              </a>
+            {{/each}}
+          </span>
         </span>
       </span>
-      <span class="dropdown">
-        <button class="dropdown-toggle" aria-haspopup="true">
-          {{current_sorter.label}}
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-          </svg>
-        </button>
-        <span class="dropdown-menu" role="menu">
+      --}}
+
+      <nav class="community-sub-nav">
+        <ul>
           {{#each sorters}}
-            <a href="{{url}}" aria-checked="{{selected}}" role="menuitemradio">
-              {{name}}
-            </a>
+            <li>
+              {{#if selected}}
+                {{name}}
+              {{else}}
+                <a href="{{url}}">
+                  {{name}}
+                </a>
+              {{/if}}
+            </li>
           {{/each}}
-        </span>
-      </span>
-    </span>
-  </div>
-
-  <div id="main-content" class="posts-list striped-list">
-    {{#if posts}}
-      <ul>
-        {{#each posts}}
-          <li>
-            <section role="region" aria-labelledby="title-{{id}}" class="striped-list-item {{#if featured}}post-featured{{/if}}">
-              <span class="striped-list-info">
-                <a href="{{url}}" id="title-{{id}}" class="striped-list-title">{{title}}</a>
-                <span class="post-overview-item">
-                  {{#if pinned}}
-                    <span class="status-label status-label-pinned">{{t 'pinned'}}</span>
-                  {{/if}}
-
-                  {{#if featured}}
-                    <span class="status-label status-label-featured">{{t 'featured'}}</span>
-                  {{/if}}
-
-                  {{#is status 'none'}}
-                  {{else}}
-                    <span class="status-label-{{status_dasherized}} status-label striped-list-status">{{status_name}}</span>
-                  {{/is}}
+        </ul>
+      </nav>
+      {{#if posts}}
+        <ul class="question-list">
+          {{#each posts}}
+            <li class="question {{#if has_official_comment}} question-official-answer {{/if}} {{#if featured}} post-featured {{/if}} {{#if pinned}} post-pinned {{/if}}">
+              <h3 class="question-title">
+                <a href="{{url}}">{{title}}</a>
+              </h3>
+              <div class="question-meta">
+                <span class="question-author">
+                  {{#link 'user_profile' id=author.id}}
+                    {{author.name}}
+                  {{/link}}
                 </span>
-
-                <div class="meta-group">
-                  <span class="meta-data">{{author.name}}</span>
-                  {{#if editor}}
-                    <span class="meta-data">{{date edited_at timeago=true}}</span>
-                    <span class="meta-data">{{t 'edited'}}</span>
-                  {{else}}
-                    <span class="meta-data">{{date created_at timeago=true}}</span>
-                  {{/if}}
-                </div>
-              </span>
-
-              <div class="post-overview-count striped-list-count">
-                <span class="striped-list-count-item">
-                  <span class="striped-list-number">{{vote_sum}}</span>
-                  {{t 'vote' count=vote_sum}}
+                <span class="question-published">
+                  {{date created_at timeago=true}}
                 </span>
-                <span class="striped-list-count-item">
-                  <span class="striped-list-number">{{comment_count}}</span>
-                  {{t 'comment' count=comment_count}}
+                <span class="question-votes">
+                  {{vote_sum}} {{t 'vote' count=vote_sum}}
                 </span>
+                <span class="question-answers">
+                  {{comment_count}} {{t 'comment' count=comment_count}}
+                </span>
+                {{! Show the post status, if any }}
+                {{#is status 'none'}}
+                {{else}}
+                  <span class="post-{{status_dasherized}}">{{status_name}}</span>
+                {{/is}}
               </div>
-            </section>
-          </li>
-        {{/each}}
-      </ul>
-    {{else}}
-      <div class="no-posts-with-filter">{{t 'no_posts_with_filter'}}</div>
-    {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>{{t 'no_content'}}</p>
+      {{/if}}
+
+      {{pagination}}
+    </section>
   </div>
-
-  {{pagination}}
-
 </div>
-
-<section class="container community-footer">
-  <h2 class="community-footer-title">{{t 'suggest_new_post'}}</h2>
-  {{link 'new_post' topic_id=topic.id class='button button-large'}}
-</section>

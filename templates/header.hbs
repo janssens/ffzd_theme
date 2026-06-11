@@ -1,97 +1,156 @@
-<a class="skip-navigation" tabindex="1" href="#main-content">{{t 'skip_navigation' }}</a>
+<!-- ============================================================
+  PRODUCTION TEMPLATE: header.hbs
+  Source: actual_theme/templates/header.hbs
+  ============================================================ -->
 
-<header class="header">
-  <div class="logo">
-    {{#link 'help_center'}}
-      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}" />
-      {{#if settings.show_brand_name}}
-        <span aria-hidden="true">{{help_center.name}}</span>
-      {{/if}}
-    {{/link}}
-  </div>
+<!-- REMOVED FROM COPENHAGEN: skip-navigation link -->
+<!-- REMOVED FROM COPENHAGEN: logo with settings.logo image and help_center.name -->
+<!-- REMOVED FROM COPENHAGEN: desktop nav-wrapper with user-nav (community, new_request, sign_in links) -->
+<!-- REMOVED FROM COPENHAGEN: user-info dropdown with avatar, name, profile/requests/contributions/sign_out menu -->
+<!-- REMOVED FROM COPENHAGEN: mobile nav-wrapper with hamburger menu, mobile user nav, sign_in/sign_out -->
+<!-- REMOVED FROM COPENHAGEN: SVG icons for menu, chevron, etc. -->
 
-  <div class="nav-wrapper-desktop">
-    <nav class="user-nav" id="user-nav" aria-label="{{t 'user_navigation'}}">
-      <ul class="user-nav-list">
-        <li>{{link 'community'}}</li>
-        <li>{{link 'new_request' class='submit-a-request'}}</li>
-        {{#unless signed_in}}
-          <li>
-            {{#link "sign_in" class="sign-in"}}
-              {{t 'sign_in'}}
-            {{/link}}
-          </li>
-        {{/unless}}
-      </ul>
-    </nav>
-    {{#if signed_in}}
-      <div class="user-info dropdown">
-        <button class="dropdown-toggle" aria-haspopup="true">
-          {{user_avatar class="user-avatar"}}
-          <span>
-            {{user_name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </span>
-        </button>
-        <div class="dropdown-menu" role="menu">
-          {{#my_profile role="menuitem"}}{{t 'profile'}}{{/my_profile}}
-          {{link "requests" role="menuitem"}}
-          {{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}
-          {{contact_details role="menuitem"}}
-          {{change_password role="menuitem"}}
-          <div class="separator" role="separator"></div>
-          {{link "sign_out" role="menuitem"}}
+<!-- ADDED FROM PRODUCTION: Custom Fairphone header with full navigation -->
+<header class="c-header">
+<!--<div class="header_banner">
+  		<span class="header_banner-close"></span>
+      <strong>Important Notice: </strong>On 19 May 2024 at approximately 19:30 CEST, our system sent out order confirmation emails for previous purchases. These emails were sent in error.<br/>
+      Rest assured, no new orders have been placed on your behalf, and your account has not been charged. We apologize for the inconvenience.
+		</div>-->
+  	<div class="row">
+        <div class="c-header__wrapper">
+            <div class="c-header__area-first">
+              	<button class="c-nav__toggle"></button>
+                <h1 class="c-logo">
+                    <a class="c-logo__link" href="https://www.fairphone.com/">
+                        Fairphone
+                    </a>
+                </h1>
+            </div>
+            <div class="c-header__area-second">
+                <ul class="c-nav">
+                    <li class="c-nav__item c-nav__link">
+                        <a href="https://shop.fairphone.com/" class="c-nav__link">Shop</a>
+                        <ul class="c-nav__sub-menu">
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://shop.fairphone.com/smartphones" class="c-nav__link">Smartphones</a>
+                            </li>
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://shop.fairphone.com/audio" class="c-nav__link">Audio</a>
+                            </li>
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://shop.fairphone.com/spare-parts/" class="c-nav__link">Spare Parts</a>
+                            </li>
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://shop.fairphone.com/accessories/" class="c-nav__link">Accessories</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="c-nav__item c-nav__link">
+                        <a href="https://shop.fairphone.com/about-us" class="c-nav__link">About</a>
+                        <ul class="c-nav__sub-menu">
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://shop.fairphone.com/about-us" class="c-nav__link">About us</a>
+                            </li>
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://www.fairphone.com/en/impact/" class="c-nav__link">Our impact</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="c-nav__item c-nav__link ">
+                        <a href="https://www.fairphone.com/blog/" class="c-nav__link">Fairphone Stories</a>
+                        <ul class="c-nav__sub-menu">
+                          	<li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://www.fairphone.com/community/" class="c-nav__link">Get Involved</a>
+                            </li>
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://www.fairphone.com/events/" class="c-nav__link">Events</a>
+                            </li>
+                            <li class="c-nav__sub-menu-item c-nav__link">
+                                <a href="https://forum.fairphone.com/" class="c-nav__link">Forum</a>
+                            </li>
+                        </ul>
+                    </li>
+                  <li class="c-nav__item c-nav__link c-nav__item">
+                          <a href="https://shop.fairphone.com/business" class="c-nav__link">Business</a>
+                    </li>
+                    <li class="c-nav__item c-nav__link c-nav__item--active">
+                          <a href="https://support.fairphone.com/" class="c-nav__link">Support</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-    {{/if}}
-  </div>
-
-  <div class="nav-wrapper-mobile">
-    <button class="menu-button-mobile" aria-controls="user-nav-mobile" aria-expanded="false" aria-label="{{t 'toggle_navigation'}}">
-      {{#if signed_in}}
-        {{user_avatar class="user-avatar"}}
-      {{/if}}
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-menu">
-        <path fill="none" stroke="currentColor" stroke-linecap="round" d="M1.5 3.5h13m-13 4h13m-13 4h13"/>
-      </svg>
-    </button>
-    <nav class="menu-list-mobile" id="user-nav-mobile" aria-expanded="false">
-      <ul class="menu-list-mobile-items">
-        {{#if signed_in}}
-          <li class="user-avatar-item item">
-            {{#my_profile class="my-profile"}}
-              {{user_avatar class="menu-profile-avatar"}}
-              <div class="menu-profile-name">
-                <div>{{user_name}}</div>
-                <div class="my-profile-tooltip">{{t 'profile'}}</div>
-              </div>
-            {{/my_profile}}
-          </li>
-          <li class="item">{{link "requests"}}</li>
-          <li class="item">{{#link "contributions"}}{{t "activities"}}{{/link}}</li>
-          <li class="item">{{contact_details}}</li>
-          <li class="item">{{change_password class='change-password'}}</li>
-          <li class="nav-divider"></li>
-        {{else}}
-          <li class="item">
-            {{#link "sign_in"}}
-              {{t 'sign_in'}}
-            {{/link}}
-          </li>
-          <li class="nav-divider"></li>
-        {{/if}}
-        <li class="item">{{link 'community'}}</li>
-        <li class="item">{{link 'new_request' class='submit-a-request'}}</li>
-        <li class="nav-divider"></li>
-        {{#if signed_in}}
-          <li class="item">
-            {{link "sign_out"}}
-          </li>
-        {{/if}}
-      </ul>
-    </nav>
-  </div>
-
+    </div>
+  
+    <div class="c-header__info">
+        <a href="/hc/en-us/signin" class="login c-header__login-btn user-not-logged-in" data-auth-action="signin" role="button">Sign In</a>
+        {{user_info}}
+				<div id="google_translate_element"></div>
+  	</div>
 </header>
+
+<!-- ADDED FROM PRODUCTION: Search popover (mobile navigation overlay) -->
+<div class="c-search-popover" data-search="">
+	<div class="c-search-popover__main">
+		<div class="c-search-popover__header">
+			<button class="c-nav__toggle active"></button>
+			<h1 class="c-logo">
+				<a class="c-logo__link" href="https://www.fairphone.com/en/">
+					<span>Fairphone</span>
+				</a>
+			</h1>
+		</div>
+		<div class="c-search-popover__contents">
+			<ul class="c-search-popover-main-nav " data-search-popover-main-nav="">
+				<li class="c-search-popover-main-nav__item  c-search-popover-main-nav__item--parent  c-search-popover-main-nav__link  c-search-popover-main-nav__item--4 ">
+					<a href="#" class="c-search-popover-main-nav__link">Products</a>
+					<ul class="c-search-popover-main-nav__sub-menu c-search-popover-main-nav__sub-menu--1">
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--20626 ">
+							<a href="https://shop.fairphone.com/en/" class="c-search-popover-main-nav__link">Smartphones</a>
+						</li>
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--20627 ">
+							<a href="https://shop.fairphone.com/en/spare-parts/" class="c-search-popover-main-nav__link">Spare Parts</a>
+						</li>
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--20628 ">
+							<a href="https://shop.fairphone.com/en/accessories/" class="c-search-popover-main-nav__link">Accessories</a>
+						</li>
+					</ul>
+				</li>
+				<li class="c-search-popover-main-nav__item  c-search-popover-main-nav__item--parent  c-search-popover-main-nav__link  c-search-popover-main-nav__item--46531 ">
+					<a href="#" class="c-search-popover-main-nav__link">Story</a>
+					<ul class="c-search-popover-main-nav__sub-menu c-search-popover-main-nav__sub-menu--1">
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--46540 ">
+							<a href="https://www.fairphone.com/en/story/" class="c-search-popover-main-nav__link">Our Mission</a>
+						</li>
+						<li class="c-search-popover-main-nav__item--parent  c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--46532 ">
+							<a href="https://www.fairphone.com/en/impact/" class="c-search-popover-main-nav__link">Our Impact</a>
+						</li>
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--46541 ">
+							<a href="https://www.fairphone.com/en/blog/" class="c-search-popover-main-nav__link">Blog</a>
+						</li>
+					</ul>
+				</li>
+				<li class="c-search-popover-main-nav__item  c-search-popover-main-nav__item--parent  c-search-popover-main-nav__link  c-search-popover-main-nav__item--46597 ">
+					<a href="#" class="c-search-popover-main-nav__link">Community</a>
+					<ul class="c-search-popover-main-nav__sub-menu c-search-popover-main-nav__sub-menu--1">
+						<li class="c-search-popover-main-nav__item--parent  c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--46688 ">
+							<a href="https://www.fairphone.com/en/community/" class="c-search-popover-main-nav__link">Get Involved</a>
+						</li>
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--41 ">
+							<a href="https://www.fairphone.com/en/events/" class="c-search-popover-main-nav__link">Events</a>
+						</li>
+						<li class="c-search-popover-main-nav__sub-menu-item c-search-popover-main-nav__sub-menu--1__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--43 ">
+							<a href="https://forum.fairphone.com/" class="c-search-popover-main-nav__link">Forum</a>
+						</li>
+					</ul>
+				</li>
+				<li class="c-search-popover-main-nav__item  c-search-popover-main-nav__link  c-search-popover-main-nav__item--20629 ">
+					<a href="https://support.fairphone.com/hc/en-us" class="c-search-popover-main-nav__link">Support</a>
+				</li>
+			</ul>
+			<a class="o-button c-search-popover__button" href="https://shop.fairphone.com/en/customer/account/">My account</a>
+		</div>
+	</div>
+</div>
+<!-- ADDED FROM PRODUCTION: Zendesk chat snippet -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=7008ae9f-e7fc-451a-9f39-3c89f8907cac"></script>

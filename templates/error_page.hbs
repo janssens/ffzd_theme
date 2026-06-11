@@ -1,7 +1,34 @@
-<div class="container-divider"></div>
-<div id="main-content" class="error-page">
-  <h1>{{t 'oops'}}</h1>
+{{!--
+  PRODUCTION TEMPLATE: error_page.hbs
+  Source: actual_theme/templates/error_page.hbs
 
+  REMOVED FROM COPENHAGEN:
+  - container-divider and error-page id="main-content"
+
+  ADDED FROM PRODUCTION:
+  - Custom search section with "Page not found..." heading (c-simple-search)
+  - Standard error handling (oops, unauthorized, forbidden, not_found)
+  - Back to homepage link
+--}}
+
+<!-- <section class="c-home-search">
+  <div class="c-home-search__content">
+    <h1>Page not found...</h1>
+    {{search}}
+  </div>
+</section> -->
+
+<section class="c-simple-search c-simple-search--small">
+  <h1 class="c-simple-search__title">Page not found...</h1>
+  <div class="c-simple-search__form">
+    {{search}}
+  </div>
+  <div class="c-simple-search__breadcrumbs">
+  </div>
+</section>
+
+<div class="error-page">
+  <h1>{{t 'oops'}}</h1>
   {{#is error 'unauthorized'}}
     <h2>{{link 'sign_in'}}</h2>
   {{/is}}
@@ -14,7 +41,6 @@
     <h2>{{t 'nonexistent_page'}}</h2>
     <p>{{t 'mistyped_address_or_moved_page'}}</p>
   {{/is}}
-
   {{#link 'help_center'}}
     {{t 'back_to_homepage'}}
   {{/link}}

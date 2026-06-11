@@ -1,72 +1,70 @@
-<div class="container-divider"></div>
-<div class="container">
-  <div class="sub-nav">
-    {{breadcrumbs}}
-    <div class="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-      </svg>
-      {{search scoped=settings.scoped_kb_search submit=false}}
+{{!--
+  PRODUCTION TEMPLATE: section_page.hbs
+  Source: actual_theme/templates/section_page.hbs
+
+  REMOVED FROM COPENHAGEN:
+  - container-divider and container wrapper
+  - sub-nav with breadcrumbs and scoped search
+  - section-container with section-content, page-header (subscribe, description)
+  - section-list (sub-sections with chevron icons)
+  - article-list with promoted/lock SVG icons
+  - pagination for sections and articles
+
+  ADDED FROM PRODUCTION:
+  - Custom search hero section (c-simple-search)
+  - Custom breadcrumbs (c-breadcrumb-wrapper)
+  - Custom category content area with title, description, article-list, pagination
+  - NOTE: CSS styles moved to SCSS files (breadcrumb, search, category)
+--}}
+
+<section class="section-page"> 
+
+  
+   {{!-- 2. SEARCH SECTION (Safety net) --}}
+  <section class="c-simple-search c-simple-search--white c-simple-search--green">
+    <h2 class="c-simple-search__title">{{dc 'hero_title'}}</h2>
+    <div class="c-simple-search__form">
+      {{search submit=true instant=true placeholder='Search by question, product'}}
     </div>
-  </div>
+  </section>
+  
+  {{!-- 1. BREADCRUMBS (Top) --}}
+  <section class="c-breadcrumb-wrapper">
+    <div class="c-container">
+      {{breadcrumbs}}
+    </div>
+  </section>
+  
 
-  <div class="section-container">
-    <section id="main-content" class="section-content">
-      <header class="page-header">
-        <h1>{{section.name}}</h1>
-        {{#if settings.show_follow_section}}
-          <div class="section-subscribe">{{subscribe}}</div>
-        {{/if}}
-        {{#if section.description}}
-          <p class="page-header-description">{{section.description}}</p>
-        {{/if}}
-      </header>
+<section class="c-category__content page-content">
+  <section class="clearfix">
+    <h1 class="c-title c-title--center">{{#if section.internal}}
+      <span class="visibility-internal" data-title="{{t 'internal'}}">
+        <span class="visibility-internal-icon"></span>
+      </span>
+      {{/if}} {{section.name}}</h1>
+    {{#if section.description}}
+    <h2 class="c-desc c-desc--center">{{section.description}}</h2>
+    {{/if}}
 
-      {{#if section.sections}}
-        <ul class="section-list">
-          {{#each section.sections}}
-          <li class="section-list-item">
-              <a href="{{url}}">
-                <span>{{name}}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" aria-hidden="true">
-                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 14.5l6.1-6.1c.2-.2.2-.5 0-.7L5 1.5"/>
-                </svg>
-              </a>
-            </li>
-          {{/each}}
-        </ul>
-      {{/if}}
-
-      {{pagination "section.sections"}}
-
-      {{#if section.articles}}
-        <ul class="article-list">
+    {{#if section.articles}}
+    <div class="c-category__content-tree">
+        <ul class="article-list" style="text-align: left;">
           {{#each section.articles}}
-            <li class="article-list-item {{#if promoted}} article-promoted{{/if}}">
-              {{#if promoted}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 12 12" class="icon-star" title="{{t 'promoted'}}">
-                  <path fill="currentColor" d="M2.88 11.73c-.19 0-.39-.06-.55-.18a.938.938 0 01-.37-1.01l.8-3L.35 5.57a.938.938 0 01-.3-1.03c.12-.37.45-.63.85-.65L4 3.73 5.12.83c.14-.37.49-.61.88-.61s.74.24.88.6L8 3.73l3.11.17a.946.946 0 01.55 1.68L9.24 7.53l.8 3a.95.95 0 01-1.43 1.04L6 9.88l-2.61 1.69c-.16.1-.34.16-.51.16z"/>
-                </svg>
-              {{/if}}
-              <a href="{{url}}" class="article-list-link">{{title}}</a>
-              {{#if internal}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
-                  <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
-                  <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
-                </svg>
-              {{/if}}
-            </li>
+          <li {{#if promoted}} class="article-promoted" {{/if}} >
+            {{#if promoted}}
+            <span data-title="{{t 'promoted'}}">★</span>
+            {{/if}}
+            <a href="{{url}}">{{title}}</a>
+          </li>
           {{/each}}
         </ul>
-      {{else}}
-        <i class="section-empty">
-          <a href="{{section.url}}">{{t 'empty'}}</a>
-        </i>
-      {{/if}}
-
-      {{pagination "section.articles"}}
-
-    </section>
-  </div>
-</div>
+        {{pagination}}
+    </div>
+    {{else}}
+    <i class="section-empty">
+      <a href="#">{{t 'empty'}}</a>
+    </i>
+    {{/if}}
+  </section>
+</section>

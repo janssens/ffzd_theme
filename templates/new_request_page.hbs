@@ -1,54 +1,88 @@
-<div class="container-divider"></div>
-<div class="container">
-  <div class="sub-nav">
-    {{breadcrumbs}}
-    <div class="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-      </svg>
-      {{search submit=false}}
+{{!--
+  PRODUCTION TEMPLATE: new_request_page.hbs
+  Source: actual_theme/templates/new_request_page.hbs
+
+  REMOVED FROM COPENHAGEN:
+  - container-divider and container wrapper
+  - sub-nav with breadcrumbs and scoped search
+  - h1 with submit_a_request translation
+  - new-request-form React component (ES module import)
+  - importmap-based rendering with settings, props, answerBotModal
+
+  ADDED FROM PRODUCTION:
+  - Custom breadcrumbs (c-breadcrumb-wrapper)
+  - Custom search hero section (c-simple-search)
+  - Custom title "Create a support ticket" with follow-up hint
+  - Custom guidance text (diagnose tool, virtual agent, contact form)
+  - request_form with explanation block
+  - Communication etiquette notice
+  - Chat component
+  - Zingtree scripts
+  - NOTE: CSS styles moved to SCSS files (breadcrumb, search, category, request)
+--}}
+
+<section class="request-page" data-request-page>
+  
+    {{!-- 1. BREADCRUMBS --}}
+  <section class="c-breadcrumb-wrapper">
+    <div class="c-container">
+      {{breadcrumbs}}
     </div>
-  </div>
+  </section>
 
-  <h1>
-    {{t 'submit_a_request'}}
-  </h1>
+   {{!-- 2. SEARCH SECTION (Safety net) --}}
+  <section class="c-simple-search c-simple-search--white c-simple-search--green">
+    <h2 class="c-simple-search__title">{{dc 'hero_title'}}</h2>
+    <div class="c-simple-search__form">
+      {{search submit=true instant=true placeholder='Search by question, product'}}
+    </div>
+  </section>
+  
 
-  <div id="main-content" class="form">
-    <div id="new-request-form"></div>
-  </div>
+    <section class="page-content">
+        <section class="clearfix page-content-header">
+            <h1 class="c-title c-title--center h1-like">
+      	Create a support ticket{{#if parent}}
+          <span class="follow-up-hint">
+            {{follow_up}}
+          </span>
+        {{/if}}
+      </h1>
+      
+      <h4 class="c-desc--center"> Having an issue with your device? Try our <a href="https://fairphone.b2x.com/troubleshooting">Diagnose and repair</a> tool.</h4>
+      <h4 class="c-desc--center"> Got a quick question? <a href="#" id="chat-with-fairphone"> Ask our virtual agent, or team</a> (Mon - Fri 10:00 - 12:00 CEST) </h4>
+      <h4 class="c-desc--center"> Something more complex? Create a support ticket using the contact form below.</h4>
+
+    </section>
+  </section>
+  
+
+  <section class="form-block">
+      {{request_form}}
+      <div class="explanation-block">
+        <div> These fields are mandatory</div>
+      </div>
+      
+    <div>
+          <p><br><br></p>
+<div class="c-desc c-desc--center listing">
+<p>&nbsp;</p>
+<h4> By contacting us, you agree to abide to our <a href="https://support.fairphone.com/hc/en-us/articles/360034915832">Communication Etiquette.</a> Note that while we try to support any language, we mainly communicate in English.</h4>
 </div>
 
-<script type="module">
-  import { renderNewRequestForm } from "new-request-form";
-
-  const container = document.getElementById("new-request-form");
-
-  const settings = {{json settings}};
-
-  const props = {
-    requestForm: {{json new_request_form}},
-    newRequestPath: {{json (page_path 'new_request')}},
-    parentId: {{json parent.id}},
-    parentIdPath: {{json parent.url}},
-    locale: {{json help_center.locale}},
-    baseLocale: {{json help_center.base_locale}},
-    hasAtMentions: {{json help_center.at_mentions_enabled}},
-    userRole: {{json user.role}},
-    userId: {{json user.id}},
-    brandId: {{json brand.id}},
-    organizations: {{json user.organizations}},
-    wysiwyg: true,
-    answerBotModal: {
-      answerBot: {{json answer_bot}},
-      hasRequestManagement: {{json help_center.request_management_enabled}},
-      isSignedIn: {{json signed_in}},
-      helpCenterPath: {{json (page_path 'help_center')}},
-      requestsPath: {{json (page_path 'requests')}},
-      requestPath: {{json (page_path 'request' id=answer_bot.request_id)}}
-    },
-  };
-
-  renderNewRequestForm(settings, props, container);
-</script>
+      <div class="c-desc c-desc--center listing">
+        <div>
+<p class="centered-text"><br><br></p>
+  <p class="centered-text"></p>
+      	</div>
+      </div>
+    </div>
+  </section>
+  
+  <div class="clearfix"></div>
+  
+  {{chat}}
+  
+	<script src="{{asset 'zingtree-10.js'}}"></script>
+  <script src="https://zingtree.com/api/zendesk-new-ticket.js"></script>
+</section>

@@ -1,88 +1,93 @@
-<div class="my-activities-nav">
-  <div class="container">
-    <nav class="collapsible-nav">
-      <button type="button" class="collapsible-nav-toggle" aria-label="{{t 'toggle_navigation'}}" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon chevron-icon">
-          <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon x-icon">
-          <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-        </svg>
-      </button>
-      <ul class="collapsible-nav-list">
-        <li class="current">
-          <a href="{{page_path 'contributions'}}" aria-current="page">{{ t 'contributions' }}</a>
-        </li>
-        <li>{{link 'subscriptions'}}</li>
-      </ul>
+{{!--
+  PRODUCTION TEMPLATE: contributions_page.hbs
+  Source: actual_theme/templates/contributions_page.hbs
+
+  REMOVED FROM COPENHAGEN:
+  - my-activities-nav with collapsible-nav (contributions, subscriptions)
+  - my-activities-sub-nav with collapsible-nav (filters)
+  - my-activities-header with h1
+  - requests table with title, type, vote_sum, last_activity, created
+  - pagination
+
+  ADDED FROM PRODUCTION:
+  - Custom breadcrumbs (sub-nav)
+  - Custom search section (c-home-search)
+  - my-activities-nav with requests, contributions, subscriptions links
+  - my-activities-sub-nav with filters
+  - Custom title "My Fairphone Activities"
+  - Custom contributions table with title, type, vote_sum, last_activity, created
+  - pagination
+--}}
+
+<section class="activities-page">
+    <nav class="sub-nav sub-nav-far clearfix">
+        {{breadcrumbs}}
     </nav>
-  </div>
-</div>
+    <section class="c-home-search">
+        <div class="c-home-search__content">
+            <div class="c-searchform">
+                {{search}}
+            </div>
+        </div>
+    </section>
 
-<div class="container">
-  <header class="my-activities-header">
-    <h1>{{t 'contributions'}}</h1>
-
-    <div class="my-activities-sub-nav">
-      <nav class="collapsible-nav collapsible-nav-border">
-        <button type="button" class="collapsible-nav-toggle" aria-label="{{t 'toggle_navigation'}}" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon chevron-icon">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon x-icon">
-            <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-          </svg>
-        </button>
-        <ul class="collapsible-nav-list">
-          {{#each filters}}
-            {{#if selected}}
-              <li class="current">
-                <a href="{{url}}" aria-current="page">{{name}}</a>
-              </li>
-            {{else}}
-              <li>
-                <a href="{{url}}">{{name}}</a>
-              </li>
+    <nav class="my-activities-nav">
+        <ul>
+            {{#if help_center.request_management_enabled}}
+                <li>{{link 'requests'}}</li>
             {{/if}}
-          {{/each}}
+            <li>{{t 'contributions'}}</li>
+            <li>{{link 'subscriptions'}}</li>
         </ul>
-      </nav>
+    </nav>
+
+    <nav class="my-activities-sub-nav">
+        <ul>
+            {{#each filters}}
+                <li>
+                    {{#if selected}}
+                        {{name}}
+                    {{else}}
+                        <a href="{{url}}">{{name}}</a>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    </nav>
+
+    <div class="my-activities-table contribution-table c-post-body">
+        <h1 class="c-title">My Fairphone Activities</h1>
+        {{#if contributions}}
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{t 'title'}}</th>
+                        <th>{{t 'type'}}</th>
+                        <th>{{t 'vote_sum'}}</th>
+                        <th>{{t 'last_activity'}}</th>
+                        <th>{{t 'created'}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each contributions}}
+                        <tr>
+                            <td>
+                                <a href="{{url}}">
+                                    {{excerpt title characters=60}}
+                                </a>
+                            </td>
+                            <td>{{type}}</td>
+                            <td>{{vote_sum}}</td>
+                            <td>{{date last_activity_at}}</td>
+                            <td>{{date created_at}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            {{t 'no_contributions'}}
+        {{/if}}
+
+        {{pagination}}
     </div>
-  </header>
-
-  <div id="main-content" class="requests">
-    {{#if contributions}}
-      <table class="table my-activities-table contributions-table">
-        <thead>
-          <tr>
-            <th>{{t 'title'}}</th>
-            <th>{{t 'type'}}</th>
-            <th>{{t 'vote_sum'}}</th>
-            <th>{{t 'last_activity'}}</th>
-            <th>{{t 'created'}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each contributions}}
-            <tr>
-              <td>
-                <a href="{{url}}" class="striped-list-title" title="{{title}}">
-                  {{excerpt title characters=60}}
-                </a>
-              </td>
-              <td>{{type}}</td>
-              <td>{{vote_sum}}</td>
-              <td>{{date last_activity_at}}</td>
-              <td>{{date created_at}}</td>
-            </tr>
-          {{/each}}
-      </tbody>
-    </table>
-    {{else}}
-      <p class="no-activities">{{t 'no_contributions'}}</p>
-    {{/if}}
-  </div>
-
-  {{pagination}}
-
-</div>
+</section>

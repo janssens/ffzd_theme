@@ -1,140 +1,151 @@
-<div class="container">
-  {{#if settings.request_list_beta}}
-    <header class="my-activities-header">
-      <h1>{{t 'requests'}}</h1>
-    </header>
+{{!--
+  PRODUCTION TEMPLATE: requests_page.hbs
+  Source: actual_theme/templates/requests_page.hbs
 
-    <div id="main-content">
-      {{request_list}}
+  REMOVED FROM COPENHAGEN:
+  - container wrapper
+  - request_list_beta conditional (request_list component)
+  - my-activities-header with h1
+  - my-activities-sub-nav with collapsible-nav (filters)
+  - requests_filter form with search, organization, status
+  - requests-search-info
+  - requests table with subject, id, created, last_activity, status (with SVG icons)
+  - pagination
+
+  ADDED FROM PRODUCTION:
+  - Custom search section with "We're here to help" heading (c-simple-search)
+  - Custom breadcrumbs
+  - my-activities-nav with requests, contributions, subscriptions links
+  - my-activities-sub-nav with filters
+  - Custom request table with search, organization, status filters
+  - Custom table with id, subject, created, last_activity, status columns
+  - jQuery-based search on select change and input enter
+--}}
+
+<section class="activities-page">
+  <section class="c-simple-search c-simple-search--small">
+    <h1 class="c-simple-search__title">We're here to help</h1>
+    <div class="c-simple-search__form">
+      {{search}}
     </div>
-  {{else}}
-    <header class="my-activities-header">
-      <h1>{{t 'my_requests'}}</h1>
+    <div class="c-simple-search__breadcrumbs">
+      {{breadcrumbs}}
+    </div>
+  </section>
 
-      <div class="my-activities-sub-nav">
-        <nav class="collapsible-nav collapsible-nav-border">
-          <button type="button" class="collapsible-nav-toggle" aria-label="{{t 'toggle_navigation'}}" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon chevron-icon">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon x-icon">
-              <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-            </svg>
-          </button>
-          <ul class="collapsible-nav-list">
+    <nav class="my-activities-nav">
+        <ul>
+            <li>{{t 'requests'}}</li>
+            <li>{{link 'contributions'}}</li>
+            <li>{{link 'subscriptions'}}</li>
+        </ul>
+    </nav>
+
+    <nav class="my-activities-sub-nav">
+        <ul>
             {{#each filters}}
-              {{#if selected}}
-                <li class="current">
-                  <a href="{{url}}" aria-current="page">{{name}}</a>
-                </li>
-              {{else}}
-                <li><a href="{{url}}">{{name}}</a></li>
-              {{/if}}
-            {{/each}}
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    {{#form 'requests_filter' id="main-content" class='requests-table-toolbar hbs-form'}}
-      <div class="search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-          <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-          <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-        </svg>
-        {{label 'query' for='quick-search' class='visibility-hidden'}}
-        {{input 'query' id='quick-search' type='search' class='requests-search'}}
-      </div>
-      {{#if help_center.multiple_organizations_enabled}}
-        <div class="request-table-filter">
-          {{label 'organization' for='request-organization-select' class='request-filter request-filter-label'}}
-          {{select 'organization' id='request-organization-select' class='request-filter'}}
-        </div>
-      {{/if}}
-
-      <div class="request-table-filter organization-subscribe">
-        {{subscribe}}
-      </div>
-
-      <div class="request-table-filter">
-        {{label 'status' for='request-status-select' class='request-filter request-filter-label'}}
-        {{select 'status' id='request-status-select' class='request-filter'}}
-      </div>
-    {{/form}}
-
-    {{#if query}}
-      <div class="requests-search-info meta-data">
-        {{t 'requests_search_results_info' count=requests.length query=query}}
-      </div>
-    {{else}}
-      {{#unless requests}}
-        <p class="no-activities">{{t 'no_requests'}}</p>
-      {{/unless}}
-    {{/if}}
-
-    <div class="requests">
-      {{#if requests}}
-        <table class="table my-activities-table requests-table {{current_filter.identifier}}-requests">
-          <thead>
-            <tr>
-              <th>{{t 'subject'}}</th>
-              <th>{{t 'id'}}</th>
-              <th>
-                {{#is current_filter.identifier 'my'}}
-                  {{#link 'requests' sort_by='created_at'}}{{t 'created'}}{{/link}}
-                {{else}}
-                  {{t 'requester'}}
-                {{/is}}
-              </th>
-              <th>{{#link 'requests' sort_by='updated_at'}}{{t 'last_activity'}}{{/link}}</th>
-              <th>
-                {{t 'status'}}
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {{#each requests}}
-              <tr {{#is status 'closed'}} class="request-closed" {{/is}}>
-                <td class="request-info requests-table-info">
-                  <a href="{{url}}" class="striped-list-title" title="{{subject}}">
-                    {{#if subject}}
-                      {{subject}}
+                <li>
+                    {{#if selected}}
+                        {{name}}
                     {{else}}
-                      {{excerpt description characters=50}}
+                        <a href="{{url}}">{{name}}</a>
                     {{/if}}
-                  </a>
-
-                  <!-- Visible on mobile -->
-                  <div class="requests-table-meta">
-                    <span class="meta-data">#{{id}}</span>
-                    <span class="meta-data">{{date created_at timeago=true}}</span>
-                    <span class="status-label status-label-request status-label-{{status}}" title="{{status_description}}">
-                      {{status_name}}
-                    </span>
-                  </div>
-                </td>
-                <td>#{{id}}</td>
-                <td>
-                  {{#is ../current_filter.identifier 'my'}}
-                    {{date created_at timeago=true}}
-                  {{else}}
-                    {{requester.name}}
-                  {{/is}}
-                </td>
-                <td>{{date updated_at timeago=true}}</td>
-                <td class="requests-table-status">
-                  <span class="status-label status-label-request status-label-{{status}}" title="{{status_description}}">
-                    {{status_name}}
-                  </span>
-                </td>
-              </tr>
+                </li>
             {{/each}}
-          </tbody>
-        </table>
-      {{/if}}
-    </div>
+        </ul>
+    </nav>
 
-    {{pagination}}
-  {{/if}}
-</div>
+    <div class="c-post-body">
+        <h1 class="c-title">My Fairphone Activities</h1>
+
+        <div class="request-table-toolbar">
+            {{input 'query' id='quick-search' type='search' class='requests-search'}}
+            {{label 'organization' for='request-organization-select' class='request-filter'}}
+            {{select 'organization' id='request-organization-select' class='request-filter'}}
+            {{label 'status' for='request-status-select' class='request-filter'}}
+            {{select 'status' id='request-status-select' class='request-filter'}}
+        </div>
+
+        <div class="my-activities-table request-table">
+            <script>
+                $(document).ready(function () {
+
+                   // Submit search on select change
+        $("#request-status-select, #request-organization-select")
+          .on("change", function() {
+            search();
+          });
+
+        // Submit search on input enter
+        $("#quick-search").on("keypress", function(e) {
+          if (e.which === 13) {
+            search();
+          }
+        });
+
+        function search() {
+          window.location.search = $.param({
+            query: $("#quick-search").val(),
+            status: $("#request-status-select").val(),
+            organization_id: $("#request-organization-select").val()
+          });
+        }
+
+      });
+      </script>
+
+            {{#if requests}}
+                <table id="request-table" class="request-table {{current_filter.identifier}}-requests">
+                    <thead>
+                        <tr>
+                            <th>{{t 'id'}}</th>
+                            <th>{{t 'subject'}}</th>
+                            <th>
+                                {{#is current_filter.identifier 'my'}}
+                                    {{t 'created'}}
+                                {{else}}
+                                    {{t 'requester'}}
+                                {{/is}}
+                            </th>
+                            <th>{{t 'last_activity'}}</th>
+                            <th>{{t 'status'}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each requests}}
+                            <tr>
+                                <td>{{id}}</td>
+                                <td>
+                                    <a href="{{url}}">
+                                        {{#if subject}}
+                                            {{subject}}
+                                        {{else}}
+                                            {{excerpt description characters=50}}
+                                        {{/if}}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{#is ../current_filter.identifier 'my'}}
+                                        {{date created_at timeago=true}}
+                                    {{else}}
+                                        {{requester.name}}
+                                    {{/is}}
+                                </td>
+                                <td>{{date updated_at timeago=true}}</td>
+                                <td>
+                                    <span class="request-status request-{{status}}" title="{{status_description}}">
+                                        {{status_name}}
+                                    </span>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <p>{{t 'no_requests'}}</p>
+            {{/if}}
+
+            {{pagination}}
+        </div>
+    </div>
+</section>
