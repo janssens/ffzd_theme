@@ -51,9 +51,9 @@
                 {{generative_answers}}
             </div>
 
-            {{#if article_results}}
+            {{#if results}}
                 <ul class="search-results-list">
-                    {{#each article_results}}
+                    {{#each results}}
                         <li class="search-result">
                             <a href="{{url}}" class="search-result-link">{{title}}</a>
                             {{#if vote_sum}}

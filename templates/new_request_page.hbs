@@ -42,11 +42,7 @@
     <section class="page-content">
         <section class="clearfix page-content-header">
             <h1 class="c-title c-title--center h1-like">
-      	Create a support ticket{{#if parent}}
-          <span class="follow-up-hint">
-            {{follow_up}}
-          </span>
-        {{/if}}
+      	Create a support ticket
       </h1>
       
       <h4 class="c-desc--center"> Having an issue with your device? Try our <a href="https://fairphone.b2x.com/troubleshooting">Diagnose and repair</a> tool.</h4>
@@ -58,7 +54,6 @@
   
 
   <section class="form-block">
-      {{request_form}}
       <div class="explanation-block">
         <div> These fields are mandatory</div>
       </div>
@@ -80,8 +75,6 @@
   </section>
   
   <div class="clearfix"></div>
-  
-  {{chat}}
   
 	<script src="{{asset 'zingtree-10.js'}}"></script>
   <script src="https://zingtree.com/api/zendesk-new-ticket.js"></script>

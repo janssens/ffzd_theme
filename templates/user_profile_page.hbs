@@ -118,7 +118,7 @@
       </ul>
     </nav>
 
-    {{#is filter_by 'activities'}}
+    {{#is current_filter.identifier 'activities'}}
       <section class="profile-section">
 
         {{#if activities}}
@@ -199,13 +199,13 @@
       </section>
     {{/is}}
 
-    {{#isnt filter_by 'activities'}}
+    {{#isnt current_filter.identifier 'activities'}}
       <section class="profile-section">
 
         {{#if contributions}}
 
           <header class="profile-section-header">
-            <h2 class="profile-section-title">{{t filter_by}}</h2>
+            <h2 class="profile-section-title">{{t current_filter.identifier}}</h2>
             {{#if sorters}}
               <span class="profile-section-description">{{sorter_description}}</span>
               <span class="profile-section-sorter dropdown">
@@ -223,7 +223,7 @@
             {{/if}}
           </header>
 
-          <ul class="profile-contribution-list profile-{{filter_by}}">
+          <ul class="profile-contribution-list profile-{{current_filter.identifier}}">
             {{#each contributions}}
 
               <li class="profile-contribution">
