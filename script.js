@@ -23,6 +23,10 @@
     const menuButton = document.querySelector(".header .menu-button-mobile");
     const menuList = document.querySelector("#user-nav-mobile");
 
+    if (!menuButton || !menuList) {
+      return;
+    }
+
     menuButton.addEventListener("click", (event) => {
       event.stopPropagation();
       toggleNavigation(menuButton, menuList);
