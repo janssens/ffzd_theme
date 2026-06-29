@@ -155,15 +155,15 @@ hr {
 
 @font-face {
   font-family: "BricolageGrotesque";
-  src: url("$asset-font-bricolage_eot");
-  src: url("$assets-font_BricolageGrotesque24pt_SemiBold-eot?#iefix") format("eot"), url("$asset-font-bricolage_woff") format("woff"), url("$asset-font-bricolage_ttf") format("truetype"), url("$asset-font-bricolage_svg") format("svg");
+  src: url($assets-font_bricolagegrotesque24pt_semibold-eot);
+  src: url($assets-font_bricolagegrotesque24pt_semibold-eot?#iefix) format("eot"), url($assets-font_bricolagegrotesque24pt_semibold-woff) format("woff"), url($assets-font_bricolagegrotesque24pt_semibold-ttf) format("truetype"), url($assets-font_bricolagegrotesque24pt_semibold-svg) format("svg");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "DMSans";
   src: url($assets-font-DMSans24pt-Medium-eot);
-  src: url($assets-font-DMSans24pt-Medium-eot?#iefix) format("eot"), url($assets-font-DMSans24pt-Medium-woff) format("woff"), url($assets-font-DMSans_24pt-Medium-ttf) format("truetype"), url($assets-font-DMSans24pt-Medium-svg) format("svg");
+  src: url($assets-font-DMSans24pt-Medium-eot?#iefix) format("eot"), url($assets-font-DMSans24pt-Medium-woff) format("woff"), url($assets-font-DMSans24pt-Medium-ttf) format("truetype"), url($assets-font-DMSans24pt-Medium-svg) format("svg");
   font-weight: 400;
   font-style: normal;
 }
