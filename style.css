@@ -155,15 +155,15 @@ hr {
 
 @font-face {
   font-family: "BricolageGrotesque";
-  src: url($assets-font_BricolageGrotesque24pt_SemiBold-eot);
-  src: url($assets-font_BricolageGrotesque24pt_SemiBold-eot?#iefix) format("eot"), url($assets-font_BricolageGrotesque24pt_SemiBold-woff) format("woff"), url($assets-font_BricolageGrotesque_24pt_SemiBold-ttf) format("truetype"), url($assets-font_BricolageGrotesque24pt_SemiBold-svg) format("svg");
+  src: url("$asset-font-bricolage_eot");
+  src: url("$assets-font_BricolageGrotesque24pt_SemiBold-eot?#iefix") format("eot"), url("$asset-font-bricolage_woff") format("woff"), url("$asset-font-bricolage_ttf") format("truetype"), url("$asset-font-bricolage_svg") format("svg");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "DMSans";
-  src: url($assets_font_DMSans24pt_Medium_eot);
-  src: url($assets_font_DMSans24pt_Medium_eot?#iefix) format("eot"), url($assets_font_DMSans24pt_Medium_woff) format("woff"), url($assets_font_DMSans_24pt_Medium_ttf) format("truetype"), url($assets_font_DMSans24pt_Medium_svg) format("svg");
+  src: url($assets-font-DMSans24pt-Medium-eot);
+  src: url($assets-font-DMSans24pt-Medium-eot?#iefix) format("eot"), url($assets-font-DMSans24pt-Medium-woff) format("woff"), url($assets-font-DMSans_24pt-Medium-ttf) format("truetype"), url($assets-font-DMSans24pt-Medium-svg) format("svg");
   font-weight: 400;
   font-style: normal;
 }
@@ -3693,33 +3693,40 @@ a.c-home-ctas__cta:hover .c-home-ctas__cta-title {
   line-height: 40px;
 }
 .c-home-search .search input[type=submit] {
-  border-radius: 0 3px 3px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background-color: #ffffff;
+  color: #00433D;
+  border: 1px solid #00433D;
+  border-radius: 0;
+  font-family: "DMSans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.c-home-search .search input[type=submit]:hover {
+  background-color: #00433D;
+  color: #ffffff;
+  border-color: #00433D;
+  text-decoration: none;
+}
+.c-home-search .search input[type=submit] {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   width: 20%;
-  text-transform: uppercase;
-  font-family: "DMSans", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  border: none;
-  color: #ffffff;
-  background-color: #3C3C3C;
-  padding: 6px 16px 3px;
-  line-height: 1.5;
-  display: block;
-  margin-bottom: 0;
-  box-shadow: none;
-  height: auto;
-  vertical-align: middle;
-  height: 40px;
-  text-transform: capitalize;
-  cursor: pointer;
-  transition: background-color 160ms ease;
 }
 .c-home-search .search input[type=submit]:hover {
-  background-color: #222222;
+  background-color: #00433D;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .c-home-categories__holder:first-child {
