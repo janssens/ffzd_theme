@@ -971,6 +971,80 @@ body .dropdown-menu > li > a {
   border-radius: 3px;
 }
 
+.c-header {
+  background: #fff;
+  margin: 0;
+  padding: 0 15px;
+  z-index: 200;
+  position: relative;
+}
+.c-header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.c-header__wrapper {
+  width: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.c-header__area-first {
+  float: left;
+  width: 10px;
+}
+
+body .login {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background-color: #ffffff;
+  color: #00433D;
+  border: 1px solid #00433D;
+  border-radius: 0;
+  font-family: "DMSans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+body .login:hover {
+  background-color: #00433D;
+  color: #ffffff;
+  border-color: #00433D;
+  text-decoration: none;
+}
+body .login::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  background-image: url($assets_svg_account_icon_black_svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: middle;
+}
+body .login {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+body .login:hover {
+  background-color: #00433D;
+  color: #ffffff;
+  text-decoration: none;
+}
+body .login:hover::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23ffffff'%3E%3Cpath d='M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z'/%3E%3C/svg%3E");
+}
+
 .c-logo {
   margin: 0;
   display: block;
