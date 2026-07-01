@@ -23,7 +23,9 @@ ADDED FROM PRODUCTION:
     {{#is identifier 'knowledge_base'}}
       {{#unless selected}}
         <script>
-          window.location.replace("{{url}}");
+          //window.location.replace("{{url}}");
+          console.log('change url');
+          console.log("{{url}}");
         </script>
       {{/unless}}
     {{/is}}
