@@ -24,6 +24,7 @@
   "community_topic_group_label": "Community topic elements",
   "favicon_description": "Icon displayed in the address bar of your browser",
   "favicon_label": "Favicon",
+  "filter_by_category": "Categories",
   "follow_article_description": "Users can follow a specific article",
   "follow_article_label": "Follow",
   "follow_post_description": "Users can follow a specific post",

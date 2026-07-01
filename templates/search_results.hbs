@@ -2,35 +2,13 @@
 PRODUCTION TEMPLATE: search_results.hbs
 Source: actual_theme/templates/search_results.hbs
 
-REMOVED FROM COPENHAGEN:
-- container-divider and container wrapper
-- sub-nav with breadcrumbs and scoped search
-- search-results-sidebar with source_filters, type_filters, subfilters, content_tag_filters
-- search-results-column with generative_answers, results list (with SVG icons, breadcrumbs, meta)
-- no-results section with SVG illustration
-- pagination
-
-ADDED FROM PRODUCTION:
-- Custom search hero section (c-simple-search)
-- Custom breadcrumbs (c-breadcrumb-wrapper)
-- Search results column with generative_answers, article_results list
-- Community section removed
-- NOTE: CSS styles moved to SCSS files (breadcrumb, search, category)
 --}}
 
-{{#if query}}
-  {{#each type_filters}}
-    {{#is identifier 'knowledge_base'}}
-      {{#unless selected}}
-        <script>
-          //window.location.replace("{{url}}");
-          console.log('change url');
-          console.log("{{url}}");
-        </script>
-      {{/unless}}
-    {{/is}}
-  {{/each}}
-{{/if}}
+<script>
+    if (window.location.pathname.indexOf('/search') !== -1) {
+        forceArticleSearchFilter();
+    }
+</script>
 
 {{breadcrumbs}}
 
@@ -261,7 +239,7 @@ ADDED FROM PRODUCTION:
                                     </div>
                                     <div class="search-result-btn-container">
                                         <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}} class="">
-                                            {{t "Read "}} {{ type }} →
+                                            {{t "read "}} {{ type }} →
                                         </a>
                                     </div>
                                     <div class="search-result-meta-container">
@@ -271,11 +249,11 @@ ADDED FROM PRODUCTION:
                                         {{#is type 'external_content_record'}}aria-label='{{t 'external_content_location_with_title' title=title}}'{{/is}}
                                         >
                                             <ol class="search-result-breadcrumbs">
-                                                <li data-type="{{ type }}">{{ type }}</li>
+                                                <li data-type="{{ type }}"><span>{{ type }}</span></li>
                                                 {{#each path_steps}}
                                                 <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
                                                 {{/each}}
-                                                <li class="meta-data">{{t "updated" }}{{date created_at timeago=true}}</li>
+                                                <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
                                             </ol>
                                         </nav>
                                     </div>
