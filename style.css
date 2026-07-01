@@ -2283,6 +2283,9 @@ main,
   padding: 20px 0;
 }
 
+nav[aria-label=Breadcrumb] {
+  position: relative;
+}
 nav[aria-label=Breadcrumb] > ol {
   width: 100vw;
   position: absolute;
@@ -3226,7 +3229,7 @@ nav[aria-label=Breadcrumb]::after {
   background-color: #ffffff;
   border: 1px solid #004137;
   border-radius: 10px;
-  box-shadow: 0 0 64px 0 #F5F5F5;
+  box-shadow: 0 0 64px 0 #d4d4d4;
 }
 
 .c-issue-diagnose__inner {
@@ -3334,7 +3337,7 @@ nav[aria-label=Breadcrumb]::after {
   background-color: #ffffff;
   border: 1px solid #004137;
   border-radius: 10px;
-  box-shadow: 0 0 64px 0 #F5F5F5;
+  box-shadow: 0 0 64px 0 #d4d4d4;
 }
 
 .c-contact-card--grey {
@@ -4098,4 +4101,30 @@ body .dropdown-menu > li > a {
 }
 .search-results-container .grid {
   display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+}
+.search-results-container .grid .search-results-sidebar {
+  grid-column: 1/4;
+}
+.search-results-container .grid .search-results-column {
+  grid-column: 3/12;
+}
+
+.search-results-list > li {
+  background-color: #ffffff;
+  border: 1px solid #878787;
+  border-radius: 28px;
+  box-shadow: 0 0 64px 0 #d4d4d4;
+  margin: 32px 0;
+  padding: 16px;
+}
+.search-results-list > li h2.search-result-title {
+  font-size: 28px;
+}
+.search-results-list > li h2.search-result-title a {
+  color: #004137;
+}
+.search-results-list > li h2.search-result-title a:hover {
+  text-decoration: none;
 }

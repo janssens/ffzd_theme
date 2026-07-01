@@ -31,14 +31,32 @@ ADDED FROM PRODUCTION:
 
     <div class="search-results-container">
             <div class="results-count">
-                {{#is results_count 1}}
-                    {{t 'One result for'}} &ldquo;{{query}}&ldquo;
-                {{else}}
-                    {{results_count}} {{t 'results for'}} &ldquo;{{query}}&ldquo;
-                {{/is}}
+                    <h1 class="search-results-subheading">
+                        {{#if results}}
+                            {{#is current_filter.identifier 'unified'}}
+                                {{#if content_tag_filters }}
+                                    {{#each (filter content_tag_filters on="selected" equals=true)}}
+                                        {{t 'results_content_tag' content_tag=name count=../results_count}}
+                                    {{/each}}
+                                {{else}}
+                                    {{t 'results' query=query count=results_count}}
+                                {{/if}}
+                            {{else}}
+                                {{#if content_tag_filters }}
+                                    {{#each (filter content_tag_filters on="selected" equals=true)}}
+                                        {{t 'results_content_tag' content_tag=name count=../results_count}}
+                                    {{/each}}
+                                {{else}}
+                                    {{#unless current_subfilter.identifier}}
+                                        {{t 'results' query=query count=results_count}}
+                                    {{else}}
+                                        {{t 'results_with_scope' query=query count=results_count scope_name=current_subfilter.name}}
+                                    {{/unless}}
+                                {{/if}}
+                            {{/is}}
+                        {{/if}}
+                    </h1>
             </div>
-
-
 
             <div class="grid">
                 <aside class="search-results-sidebar">
@@ -203,31 +221,6 @@ ADDED FROM PRODUCTION:
                     <div class="c-generative-answer">
                         {{generative_answers}}
                     </div>
-                    <h1 class="search-results-subheading">
-                        {{#if results}}
-                            {{#is current_filter.identifier 'unified'}}
-                                {{#if content_tag_filters }}
-                                    {{#each (filter content_tag_filters on="selected" equals=true)}}
-                                        {{t 'results_content_tag' content_tag=name count=../results_count}}
-                                    {{/each}}
-                                {{else}}
-                                    {{t 'results' query=query count=results_count}}
-                                {{/if}}
-                            {{else}}
-                                {{#if content_tag_filters }}
-                                    {{#each (filter content_tag_filters on="selected" equals=true)}}
-                                        {{t 'results_content_tag' content_tag=name count=../results_count}}
-                                    {{/each}}
-                                {{else}}
-                                    {{#unless current_subfilter.identifier}}
-                                        {{t 'results' query=query count=results_count}}
-                                    {{else}}
-                                        {{t 'results_with_scope' query=query count=results_count scope_name=current_subfilter.name}}
-                                    {{/unless}}
-                                {{/if}}
-                            {{/is}}
-                        {{/if}}
-                    </h1>
                     {{#if results}}
                     <ul class="search-results-list">
                         {{#each results}}
@@ -295,19 +288,17 @@ ADDED FROM PRODUCTION:
                                         {{#is type 'community_post'}}aria-label='{{t 'post_location_with_title' title=title}}'{{/is}}
                                         {{#is type 'external_content_record'}}aria-label='{{t 'external_content_location_with_title' title=title}}'{{/is}}
                                         >
-                                            <ol class="breadcrumbs search-result-breadcrumbs">
+                                            <ol class="search-result-breadcrumbs">
+                                                <li data-type="{{ type }}">{{ type }}</li>
                                                 {{#each path_steps}}
                                                 <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
                                                 {{/each}}
+                                                <li class="meta-data">{{t "Updated" }}{{date created_at timeago=true}}</li>
                                             </ol>
                                         </nav>
-                                        {{#unless is_external}}
-                                        <span class="meta-data">{{author.name}}</span>
-                                        {{/unless}}
-                                        <span class="meta-data">{{date created_at}}</span>
+                                        
                                     </div>
                                 </header>
-                                <p class="search-result-description">{{text}}</p>
                             </article>
                         </li>
                         {{/each}}
