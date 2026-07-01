@@ -52,6 +52,21 @@
             </div>
 
             {{#if results}}
+                {{#if subfilters}}
+                    <aside class="search-results-sidebar">
+                    <h2 class="search-results-sidebar-title">{{t 'filter_by_category'}}</h2>
+                    <ul class="category-filter-list">
+                        {{#each subfilters}}
+                        <li>
+                            <a href="{{url}}" class="category-filter-item{{#if selected}} is-selected{{/if}}">
+                            {{name}}
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    </aside>
+                {{/if}}
+
                 <ul class="search-results-list">
                     {{#each results}}
                         <li class="search-result">
@@ -61,6 +76,8 @@
                             {{/if}}
                             <div class="search-result-meta">{{meta}}</div>
                             <div class="search-result-description">{{text}}</div>
+                            <div>{{type}}</div>
+                            <div>{{created_at}}</div>
                         </li>
                     {{/each}}
                 </ul>
