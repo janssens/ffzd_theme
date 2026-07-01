@@ -18,7 +18,7 @@
           <ol>
             {{#each sections}}
               <li >
-                  <a href="#section_{{ section.id }}">{{name}}</a>
+                  <a href="#section_{{ id }}">{{name}}</a>
               </li>
             {{/each}}
           </ol>
@@ -162,7 +162,7 @@
         {{#if category.sections}}
           <div class="c-category__content-tree">
             {{#each sections}}
-              <section class="section" id="section_{{ section.id }}">
+              <section class="section" id="section_{{ id }}">
                 <h2>
                   <a href="{{url}}">{{name}}</a>
                 </h2>
@@ -174,7 +174,7 @@
                         <header>
                           <div class="search-result-title-container">
                             <h2 class="search-result-title">
-                              <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}}>
+                              <a href="{{url}}">
                                 {{#if promoted}}
                                 <span data-title="{{t 'promoted'}}">★</span>
                                 {{/if}}
@@ -183,16 +183,14 @@
                             </h2>
                           </div>
                           <div class="search-result-btn-container">
-                            <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}} class="">
+                            <a href="{{url}}" class="">
                               {{t "read "}} {{ type }} →
                             </a>
                           </div>
                           <div class="search-result-meta-container">
-                            <nav {{#is type 'article' }}aria-label='{{t ' article_location_with_title' title=title}}'{{/is}} {{#is
-                              type 'community_post' }}aria-label='{{t ' post_location_with_title' title=title}}'{{/is}} {{#is
-                              type 'external_content_record' }}aria-label='{{t ' external_content_location_with_title' title=title}}'{{/is}}>
+                            <nav>
                               <ol class="search-result-breadcrumbs">
-                                <li data-type="{{ type }}"><span>{{ type }}</span></li>
+                                <li data-type="article"><span>article</span></li>
                                 {{#each path_steps}}
                                 <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
                                 {{/each}}
