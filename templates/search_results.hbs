@@ -5,8 +5,12 @@ Source: actual_theme/templates/search_results.hbs
 --}}
 
 
+<section class="c-breadcrumb-wrapper">
+    <div class="c-container">
+        {{breadcrumbs}}
+    </div>
+</section>
 
-{{breadcrumbs}}
 
 <section class="search-results-page">
 
@@ -141,6 +145,21 @@ Source: actual_theme/templates/search_results.hbs
                     </section>
                     {{else}}
                         <script>
+                            /**
+                            * Forces the "type=knowledge_base" parameter in the search URL
+                            * if missing, then reloads the page.
+                            * Only call this on the search results page.
+                            */
+                            function forceArticleSearchFilter() {
+                                var params = new URLSearchParams(window.location.search);
+
+                                // Only target pages with an active search,
+                                // and only if the type is not already specified in the URL
+                                if (params.has('query') && !params.has('type')) {
+                                    params.set('type', 'knowledge_base');
+                                    window.location.replace(window.location.pathname + '?' + params.toString());
+                                }
+                            }
                             forceArticleSearchFilter();
                         </script>
                     {{/if}}

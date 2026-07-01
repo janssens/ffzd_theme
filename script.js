@@ -776,18 +776,3 @@ $(document).ready(function () {
 
 /* End extra code - Combined field logic for two fields */
 
-/**
- * Forces the "type=knowledge_base" parameter in the search URL
- * if missing, then reloads the page.
- * Only call this on the search results page.
- */
-function forceArticleSearchFilter() {
-  var params = new URLSearchParams(window.location.search);
-
-  // Only target pages with an active search,
-  // and only if the type is not already specified in the URL
-  if (params.has('query') && !params.has('type')) {
-    params.set('type', 'knowledge_base');
-    window.location.replace(window.location.pathname + '?' + params.toString());
-  }
-}

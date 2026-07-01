@@ -1,44 +1,35 @@
 {{!--
   PRODUCTION TEMPLATE: category_page.hbs
   Source: actual_theme/templates/category_page.hbs
-
-  REMOVED FROM COPENHAGEN:
-  - container-divider and container wrapper
-  - sub-nav with breadcrumbs and scoped search
-  - category-container with page-header (h1, description)
-  - section-tree with sections, article-list, see-all-articles, more_articles
-  - SVG icons for promoted/lock/star
-
-  ADDED FROM PRODUCTION:
-  - Custom search hero section (c-simple-search)
-  - Custom breadcrumbs (c-breadcrumb-wrapper)
-  - Custom category content area with accordion for internal agent portal (category id 33003929573650)
-  - Standard layout with sections, article-list for all other categories
-  - NOTE: CSS styles moved to SCSS files (breadcrumb, search, category, accordion)
 --}}
 
 <section class="category-page">
 
-  {{!-- 1. SEARCH SECTION --}}
-<section class="c-simple-search c-simple-search--white c-simple-search--green">
-  <h1 class="c-simple-search__title">{{dc 'search_title'}}</h1>
-  <div class="c-simple-search__form">
-    {{search submit=true instant=true placeholder='Search by question, product'}}
-  </div>
-</section>
+  <div class="grid">
+    <aside class="category-page-sidebar">
+      {{!-- 1. BREADCRUMBS --}}
+      <section class="c-breadcrumb-wrapper">
+        {{breadcrumbs}}
+      </section>
 
-  {{!-- 2. BREADCRUMBS --}}
-  <section class="c-breadcrumb-wrapper">
-    <div class="c-container">
-      {{breadcrumbs}}
-    </div>
-  </section>
+      {{!-- 2. NAV --}}
+      <section class="nav">
+        {{#if category.sections}}
+          <ol>
+            {{#each sections}}
+              <li >
+                  <a href="#section_{{ section.id }}">{{name}}</a>
+              </li>
+            {{/each}}
+          </ol>
+        {{/if}}
+      </section>
+    </aside>
 
-  {{!-- 3. CATEGORY CONTENT --}}
-  <section class="c-category__content page-content">
-    <section class="clearfix">
-
+    <section id="main-content" class="category-page-column">
       {{#is category.id 33003929573650}}
+
+      <div>
 
         <h1 class="c-category-body-title">Internal Agent Portal</h1>
         <p class="c-desc c-desc--center">Navigate to the sections below to find internal articles.</p>
@@ -157,6 +148,8 @@
           })();
         </script>
 
+      </div>
+
       {{else}}
 
         {{!-- STANDARD LAYOUT — All other categories --}}
@@ -169,18 +162,46 @@
         {{#if category.sections}}
           <div class="c-category__content-tree">
             {{#each sections}}
-              <section class="section" data-toggle-category>
-                <h3>
+              <section class="section" id="section_{{ section.id }}">
+                <h2>
                   <a href="{{url}}">{{name}}</a>
-                </h3>
+                </h2>
                 {{#if articles}}
                   <ul class="article-list">
                     {{#each articles}}
                       <li {{#if promoted}} class="article-promoted" {{/if}}>
-                        {{#if promoted}}
-                          <span data-title="{{t 'promoted'}}">★</span>
-                        {{/if}}
-                        <a href="{{url}}">{{title}}</a>
+                      <article>
+                        <header>
+                          <div class="search-result-title-container">
+                            <h2 class="search-result-title">
+                              <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}}>
+                                {{#if promoted}}
+                                <span data-title="{{t 'promoted'}}">★</span>
+                                {{/if}}
+                                {{title}}
+                              </a>
+                            </h2>
+                          </div>
+                          <div class="search-result-btn-container">
+                            <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}} class="">
+                              {{t "read "}} {{ type }} →
+                            </a>
+                          </div>
+                          <div class="search-result-meta-container">
+                            <nav {{#is type 'article' }}aria-label='{{t ' article_location_with_title' title=title}}'{{/is}} {{#is
+                              type 'community_post' }}aria-label='{{t ' post_location_with_title' title=title}}'{{/is}} {{#is
+                              type 'external_content_record' }}aria-label='{{t ' external_content_location_with_title' title=title}}'{{/is}}>
+                              <ol class="search-result-breadcrumbs">
+                                <li data-type="{{ type }}"><span>{{ type }}</span></li>
+                                {{#each path_steps}}
+                                <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
+                                {{/each}}
+                                <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
+                              </ol>
+                            </nav>
+                          </div>
+                        </header>
+                      </article>
                       </li>
                     {{/each}}
                   </ul>
@@ -191,7 +212,7 @@
         {{/if}}
 
       {{/is}}
-
     </section>
-  </section>
-</section>
+  </div>
+
+
