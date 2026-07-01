@@ -3767,7 +3767,7 @@ code, kbd, samp {
 
 .category-page .nav {
   position: sticky;
-  top: 0;
+  top: 48px;
   padding: 0 16px;
 }
 .category-page .nav li {

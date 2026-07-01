@@ -1,32 +1,93 @@
 {{!--
   PRODUCTION TEMPLATE: section_page.hbs
   Source: actual_theme/templates/section_page.hbs
-
-  REMOVED FROM COPENHAGEN:
-  - container-divider and container wrapper
-  - sub-nav with breadcrumbs and scoped search
-  - section-container with section-content, page-header (subscribe, description)
-  - section-list (sub-sections with chevron icons)
-  - article-list with promoted/lock SVG icons
-  - pagination for sections and articles
-
-  ADDED FROM PRODUCTION:
-  - Custom search hero section (c-simple-search)
-  - Custom breadcrumbs (c-breadcrumb-wrapper)
-  - Custom category content area with title, description, article-list, pagination
-  - NOTE: CSS styles moved to SCSS files (breadcrumb, search, category)
 --}}
+
+<section class="section-page">
+
+  <div class="grid">
+    <aside class="section-page-sidebar">
+      {{!-- 1. BREADCRUMBS --}}
+      <section class="c-breadcrumb-wrapper">
+        {{breadcrumbs}}
+      </section>
+
+      {{!-- 2. NAV --}}
+      <section class="nav">
+        {{#if category.sections}}
+          <ol>
+            {{#each sections}}
+              <li >
+                  <a href="#section_{{ id }}">{{name}}</a>
+              </li>
+            {{/each}}
+          </ol>
+        {{/if}}
+      </section>
+    </aside>
+
+    <section id="main-content" class="category-page-column">
+      
+
+        {{!-- STANDARD LAYOUT — All other categories --}}
+        <h1 class="c-category-body-title">{{section.name}}</h1>
+
+        {{#if section.description}}
+          <p class="c-desc">{{section.description}}</p>
+        {{/if}}
+
+        {{#if section.articles}}
+          <div class="c-section__content-tree">
+                  <ul class="article-list">
+                    {{#each section.articles}}
+                      <li {{#if promoted}} class="article-promoted" {{/if}}>
+                      <article>
+                        <header>
+                          <div class="search-result-title-container">
+                            <h2 class="search-result-title">
+                              <a href="{{url}}">
+                                {{#if promoted}}
+                                <span data-title="{{t 'promoted'}}">★</span>
+                                {{/if}}
+                                {{title}}
+                              </a>
+                            </h2>
+                          </div>
+                          <div class="search-result-btn-container">
+                            <a href="{{url}}" class="">
+                              {{t "read_guide"}} →
+                            </a>
+                          </div>
+                          <div class="search-result-meta-container">
+                            <nav>
+                              <ol class="search-result-breadcrumbs">
+                                <li data-type="article"><span>article</span></li>
+                                {{#each path_steps}}
+                                <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
+                                {{/each}}
+                                <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
+                              </ol>
+                            </nav>
+                          </div>
+                        </header>
+                      </article>
+                      </li>
+                    {{/each}}
+                  </ul>
+          </div>
+        {{/if}}
+
+
+    </section>
+  </div>
+
+
+
 
 <section class="section-page"> 
 
   
-   {{!-- 2. SEARCH SECTION (Safety net) --}}
-  <section class="c-simple-search c-simple-search--white c-simple-search--green">
-    <h2 class="c-simple-search__title">{{dc 'hero_title'}}</h2>
-    <div class="c-simple-search__form">
-      {{search submit=true instant=true placeholder='Search by question, product'}}
-    </div>
-  </section>
+
   
   {{!-- 1. BREADCRUMBS (Top) --}}
   <section class="c-breadcrumb-wrapper">
