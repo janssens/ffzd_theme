@@ -18,10 +18,23 @@ ADDED FROM PRODUCTION:
 - NOTE: CSS styles moved to SCSS files (breadcrumb, search, category)
 --}}
 
+{{#if query}}
+  {{#each type_filters}}
+    {{#is identifier 'knowledge_base'}}
+      {{#unless selected}}
+        <script>
+          window.location.replace("{{url}}");
+        </script>
+      {{/unless}}
+    {{/is}}
+  {{/each}}
+{{/if}}
+
 {{breadcrumbs}}
 
 <section class="search-results-page">
 
+    <div class="title">{{t "search_results" }}</div>
 
     <section class="c-simple-search">
         <div class="c-simple-search__form">
@@ -97,21 +110,8 @@ ADDED FROM PRODUCTION:
                     </section>
                     {{/if}}
                     {{#if type_filters}}
-                    <section class="filters-in-section collapsible-sidebar">
+                    <section class="filters-in-section type-filter-section collapsible-sidebar">
                         <h3 class="collapsible-sidebar-title sidenav-title">{{t 'filter_type'}}</h3>
-                        <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false"
-                            aria-label="{{t 'search_result_type_menu'}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                viewBox="0 0 12 12" aria-hidden="true"
-                                class="collapsible-sidebar-toggle-icon chevron-icon">
-                                <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                    d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                viewBox="0 0 12 12" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon">
-                                <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3" />
-                            </svg>
-                        </button>
                         <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
                             {{#each type_filters}}
                             <li>
@@ -136,19 +136,6 @@ ADDED FROM PRODUCTION:
                         {{#is current_filter.identifier 'community'}}
                         <h3 class="collapsible-sidebar-title sidenav-title">{{t 'filter_by_topic'}}</h3>
                         {{/is}}
-                        <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false"
-                            aria-label="{{#is current_filter.identifier 'knowledge_base'}}{{t 'search_result_articles_menu'}}{{else}}{{#is current_filter.identifier 'community'}}{{t 'search_result_posts_menu'}}{{else}}{{t 'search_result_subfilter_menu'}}{{/is}}{{/is}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                viewBox="0 0 12 12" aria-hidden="true"
-                                class="collapsible-sidebar-toggle-icon chevron-icon">
-                                <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                    d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                viewBox="0 0 12 12" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon">
-                                <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3" />
-                            </svg>
-                        </button>
                         <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
                             {{#each subfilters}}
                             <li>
@@ -180,18 +167,6 @@ ADDED FROM PRODUCTION:
                     {{#if content_tag_filters}}
                     <section class="filters-in-section collapsible-sidebar">
                         <h3 class="collapsible-sidebar-title sidenav-title">{{t 'filter_content_tag'}}</h3>
-                        <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                viewBox="0 0 12 12" aria-hidden="true"
-                                class="collapsible-sidebar-toggle-icon chevron-icon">
-                                <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                    d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false"
-                                viewBox="0 0 12 12" aria-hidden="true" class="collapsible-sidebar-toggle-icon x-icon">
-                                <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3" />
-                            </svg>
-                        </button>
                         <ul class="multibrand-filter-list multibrand-filter-list--collapsed">
                             {{#each content_tag_filters}}
                             {{#if selected}}
@@ -282,6 +257,11 @@ ADDED FROM PRODUCTION:
                                             {{/if}}
                                         </div>
                                     </div>
+                                    <div class="search-result-btn-container">
+                                        <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}} class="">
+                                            {{t "Read "}} {{ type }} →
+                                        </a>
+                                    </div>
                                     <div class="search-result-meta-container">
                                         <nav 
                                         {{#is type 'article'}}aria-label='{{t 'article_location_with_title' title=title}}'{{/is}}
@@ -293,10 +273,9 @@ ADDED FROM PRODUCTION:
                                                 {{#each path_steps}}
                                                 <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
                                                 {{/each}}
-                                                <li class="meta-data">{{t "Updated" }}{{date created_at timeago=true}}</li>
+                                                <li class="meta-data">{{t "updated" }}{{date created_at timeago=true}}</li>
                                             </ol>
                                         </nav>
-                                        
                                     </div>
                                 </header>
                             </article>
