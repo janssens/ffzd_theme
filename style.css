@@ -1046,6 +1046,12 @@ body .login:hover::before {
   background-image: url($assets-svg_fp_logo_forest-svg);
   background-position: left center;
   background-repeat: no-repeat;
+  width: 150px;
+  display: block;
+  height: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-indent: -999em;
 }
 
 body .c-header__info .user-info [role=button] {
@@ -1317,6 +1323,9 @@ body .c-header__info .user-info + #google_translate_element {
 .c-nav__link:hover {
   color: #00786E;
   text-decoration: none;
+}
+.c-nav__link:visited {
+  color: #004137;
 }
 
 .c-nav__link > a {
@@ -2861,8 +2870,17 @@ nav[aria-label=Breadcrumb]::after {
 
 .pagination ul {
   display: flex;
+  gap: 32px;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 16px;
+}
+.pagination ul li > a {
+  display: block;
+  font-size: 16px;
+}
+.pagination ul li > a span[class$=text] {
+  color: #3C3C3C;
 }
 
 .c-home-search {
@@ -2970,6 +2988,10 @@ nav[aria-label=Breadcrumb]::after {
   .c-simple-search--small .c-simple-search__title {
     font-size: 2.25rem;
   }
+}
+
+.c-simple-search__form button.clear-button {
+  display: none;
 }
 
 .c-simple-search--small .c-simple-search__form {
@@ -4107,7 +4129,7 @@ ol.search-result-breadcrumbs li {
   padding: 0;
 }
 ol.search-result-breadcrumbs li a {
-  color: #4a4a4a;
+  color: #3C3C3C;
   background-color: #f6fbf5;
   display: inline-block;
   border-radius: 4px;
@@ -4131,8 +4153,8 @@ ol.search-result-breadcrumbs li[data-type=article]::before {
   height: 100%;
   background-color: #3C3C3C;
   position: absolute;
-  -webkit-mask-image: url("../theme/assets/svg_file.svg");
-  mask-image: url("../theme/assets/svg_file.svg");
+  -webkit-mask-image: url($assets-svg_file-svg);
+  mask-image: url($assets-svg_file-svg);
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -4154,9 +4176,9 @@ ol.search-result-breadcrumbs li:last-child::after {
 
 .search-results-list > li {
   background-color: #ffffff;
-  border: 1px solid #d4ddd4;
+  border: 1px solid #cacac7;
   border-radius: 10px;
-  box-shadow: 0 0 64px 0 #d4d4d4;
+  box-shadow: 0 0 32px 0 #F5F5F5;
   margin: 32px 0;
   padding: 16px;
 }

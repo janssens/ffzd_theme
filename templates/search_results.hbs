@@ -4,11 +4,7 @@ Source: actual_theme/templates/search_results.hbs
 
 --}}
 
-<script>
-    if (window.location.pathname.indexOf('/search') !== -1) {
-        forceArticleSearchFilter();
-    }
-</script>
+
 
 {{breadcrumbs}}
 
@@ -143,6 +139,10 @@ Source: actual_theme/templates/search_results.hbs
                             {{/is}}
                         </ul>
                     </section>
+                    {{else}}
+                        <script>
+                            forceArticleSearchFilter();
+                        </script>
                     {{/if}}
                     {{#if content_tag_filters}}
                     <section class="filters-in-section collapsible-sidebar">
