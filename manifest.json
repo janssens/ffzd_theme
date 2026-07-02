@@ -1,14 +1,74 @@
 {
-  "name": "Fairphone spring 2026 github v4.4.28",
+  "name": "Fairphone Sumer 2026 github v4.4.29",
   "author": "gaetan.janssens@fairphone.com",
-  "version": "4.4.28",
+  "version": "4.4.29",
   "api_version": 4,
   "default_locale": "en-us",
   "settings": [
     {
-      "identifier": "repair_smartphone_image",
-      "type": "file",
-      "label": "Image section repair smartphone"
+      "label": "repair_smartphone_section_group_label",
+      "variables": [
+        {
+          "identifier": "repair_smartphone_section_show_image",
+          "type": "checkbox",
+          "label": "repair_smartphone_section_show_image_label",
+          "description": "repair_smartphone_section_show_image_description",
+          "value": false
+        },
+        {
+          "identifier": "repair_smartphone_section_image",
+          "type": "file",
+          "label": "repair_smartphone_section_image_label",
+          "description": "repair_smartphone_section_image_description"
+        },
+        {
+          "identifier": "repair_smartphone_section_image_position",
+          "type": "list",
+          "label": "repair_smartphone_section_image_position_label",
+          "description": "repair_smartphone_section_image_position_description",
+          "value": "left",
+          "options": [
+            {
+              "label": "repair_smartphone_section_image_position_left",
+              "value": "left"
+            },
+            {
+              "label": "repair_smartphone_section_image_position_right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "identifier": "repair_smartphone_section_max_articles",
+          "type": "range",
+          "label": "repair_smartphone_section_max_articles_label",
+          "description": "repair_smartphone_section_max_articles_description",
+          "min": -1,
+          "max": 20,
+          "value": -1
+        },
+        {
+          "identifier": "repair_smartphone_section_see_all_label",
+          "type": "text",
+          "label": "repair_smartphone_section_see_all_label_label",
+          "description": "repair_smartphone_section_see_all_label_description",
+          "value": "See all articles"
+        },
+        {
+          "identifier": "repair_smartphone_section_external_link_url",
+          "type": "text",
+          "label": "repair_smartphone_section_external_link_url_label",
+          "description": "repair_smartphone_section_external_link_url_description",
+          "value": ""
+        },
+        {
+          "identifier": "repair_smartphone_section_external_link_label",
+          "type": "text",
+          "label": "repair_smartphone_section_external_link_label_label",
+          "description": "repair_smartphone_section_external_link_label_description",
+          "value": ""
+        }
+      ]
     }
   ]
 }
