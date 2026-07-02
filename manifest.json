@@ -6,66 +6,66 @@
   "default_locale": "en-us",
   "settings": [
     {
-      "label": "repair_smartphone_section_group_label",
+      "label": "repair_phone_section_group_lbl",
       "variables": [
         {
-          "identifier": "repair_smartphone_section_show_image",
+          "identifier": "repair_phone_show_img",
           "type": "checkbox",
-          "label": "repair_smartphone_section_show_image_label",
-          "description": "repair_smartphone_section_show_image_description",
+          "label": "repair_phone_show_img_lbl",
+          "description": "repair_phone_show_img_desc",
           "value": false
         },
         {
-          "identifier": "repair_smartphone_section_image",
+          "identifier": "repair_phone_img",
           "type": "file",
-          "label": "repair_smartphone_section_image_label",
-          "description": "repair_smartphone_section_image_description"
+          "label": "repair_phone_img_lbl",
+          "description": "repair_phone_img_desc"
         },
         {
-          "identifier": "repair_smartphone_section_image_position",
+          "identifier": "repair_phone_img_pos",
           "type": "list",
-          "label": "repair_smartphone_section_image_position_label",
-          "description": "repair_smartphone_section_image_position_description",
+          "label": "repair_phone_img_pos_lbl",
+          "description": "repair_phone_img_pos_desc",
           "value": "left",
           "options": [
             {
-              "label": "repair_smartphone_section_image_position_left",
+              "label": "repair_phone_img_pos_left",
               "value": "left"
             },
             {
-              "label": "repair_smartphone_section_image_position_right",
+              "label": "repair_phone_img_pos_right",
               "value": "right"
             }
           ]
         },
         {
-          "identifier": "repair_smartphone_section_max_articles",
+          "identifier": "repair_phone_max_artcls",
           "type": "range",
-          "label": "repair_smartphone_section_max_articles_label",
-          "description": "repair_smartphone_section_max_articles_description",
+          "label": "repair_phone_max_artcls_lbl",
+          "description": "repair_phone_max_artcls_desc",
           "min": -1,
           "max": 20,
           "value": -1
         },
         {
-          "identifier": "repair_smartphone_section_see_all_label",
+          "identifier": "repair_phone_all_lbl",
           "type": "text",
-          "label": "repair_smartphone_section_see_all_label_label",
-          "description": "repair_smartphone_section_see_all_label_description",
+          "label": "repair_phone_all_lbl_lbl",
+          "description": "repair_phone_all_lbl_desc",
           "value": "See all articles"
         },
         {
-          "identifier": "repair_smartphone_section_external_link_url",
+          "identifier": "repair_phone_ext_link_url",
           "type": "text",
-          "label": "repair_smartphone_section_external_link_url_label",
-          "description": "repair_smartphone_section_external_link_url_description",
+          "label": "repair_phone_ext_link_url_lbl",
+          "description": "repair_phone_ext_link_url_desc",
           "value": ""
         },
         {
-          "identifier": "repair_smartphone_section_external_link_label",
+          "identifier": "repair_phone_ext_link_lbl",
           "type": "text",
-          "label": "repair_smartphone_section_external_link_label_label",
-          "description": "repair_smartphone_section_external_link_label_description",
+          "label": "repair_phone_ext_link_lbl_lbl",
+          "description": "repair_phone_ext_link_lbl_desc",
           "value": ""
         }
       ]
