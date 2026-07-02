@@ -1,7 +1,7 @@
 {
-  "name": "Fairphone Sumer 2026 github v4.4.29",
+  "name": "Fairphone Sumer 2026 github v4.4.30",
   "author": "gaetan.janssens@fairphone.com",
-  "version": "4.4.29",
+  "version": "4.4.30",
   "api_version": 4,
   "default_locale": "en-us",
   "settings": [
@@ -40,12 +40,16 @@
         },
         {
           "identifier": "repair_phone_max_artcls",
-          "type": "range",
+          "type": "list",
           "label": "repair_phone_max_artcls_lbl",
           "description": "repair_phone_max_artcls_desc",
-          "min": -1,
-          "max": 20,
-          "value": -1
+          "value": "-1",
+          "options": [
+            { "label": "repair_phone_max_artcls_all", "value": "-1" },
+            { "label": "repair_phone_max_artcls_3", "value": "3" },
+            { "label": "repair_phone_max_artcls_5", "value": "5" },
+            { "label": "repair_phone_max_artcls_10", "value": "10" }
+          ]
         },
         {
           "identifier": "repair_phone_all_lbl",

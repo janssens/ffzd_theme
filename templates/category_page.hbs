@@ -164,7 +164,87 @@
             {{#each sections}}
               {{#is id 31680016190610}}{{!-- Repair guides (phones) --}}
                 coucou  Repair guides (phones)
-              {{/is}}
+                {{#if articles}}
+                  <section class="section" id="section_{{ id }}">
+                  <h2><a href="{{url}}">{{name}}</a></h2>
+                  <ul class="article-list">
+                  {{#is ../settings.repair_phone_max_artcls "-1"}}
+                  {{!-- afficher tous les articles --}}
+                    {{#each articles}}
+                      <li {{#if promoted}} class="article-promoted" {{/if}}>
+                      <article>
+                        <header>
+                          <div class="search-result-title-container">
+                            <h2 class="search-result-title">
+                              <a href="{{url}}">
+                                {{#if promoted}}
+                                <span data-title="{{t 'promoted'}}">★</span>
+                                {{/if}}
+                                {{title}}
+                              </a>
+                            </h2>
+                          </div>
+                          <div class="search-result-btn-container">
+                            <a href="{{url}}" class="">
+                              {{t "read_guide"}} →
+                            </a>
+                          </div>
+                          <div class="search-result-meta-container">
+                            <nav>
+                              <ol class="search-result-breadcrumbs">
+                                <li data-type="article"><span>article</span></li>
+                                {{#each path_steps}}
+                                <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
+                                {{/each}}
+                                <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
+                              </ol>
+                            </nav>
+                          </div>
+                        </header>
+                      </article>
+                      </li>
+                    {{/each}}
+                  
+                  {{else}}
+                  {{#each (slice articles to=(eval ../../settings.repair_phone_max_artcls "+" 0))}}
+<li {{#if promoted}} class="article-promoted" {{/if}}>
+                      <article>
+                        <header>
+                          <div class="search-result-title-container">
+                            <h2 class="search-result-title">
+                              <a href="{{url}}">
+                                {{#if promoted}}
+                                <span data-title="{{t 'promoted'}}">★</span>
+                                {{/if}}
+                                {{title}}
+                              </a>
+                            </h2>
+                          </div>
+                          <div class="search-result-btn-container">
+                            <a href="{{url}}" class="">
+                              {{t "read_guide"}} →
+                            </a>
+                          </div>
+                          <div class="search-result-meta-container">
+                            <nav>
+                              <ol class="search-result-breadcrumbs">
+                                <li data-type="article"><span>article</span></li>
+                                {{#each path_steps}}
+                                <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
+                                {{/each}}
+                                <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
+                              </ol>
+                            </nav>
+                          </div>
+                        </header>
+                      </article>
+                      </li>
+                  {{/each}}
+                  {{/is}}
+                    </ul>
+                  </section>
+                {{/if}}
+              {{else}}
               <section class="section" id="section_{{ id }}">
                 <h2>
                   <a href="{{url}}">{{name}}</a>
@@ -208,6 +288,7 @@
                   </ul>
                 {{/if}}
               </section>
+              {{/is}}
             {{/each}}
           </div>
         {{/if}}
