@@ -666,9 +666,9 @@
 
 /* Start extra code - Combined field logic for two fields */
 
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
   // Styles for the Yes button
-  $("head").append(`
+  document.head.insertAdjacentHTML("beforeend", `
     <style>
       #yes-button {
         font-weight: bold;
@@ -688,11 +688,13 @@ $(document).ready(function () {
   `);
 
   // Get the selected ticket form ID
-  var ticketForm = $("#request_ticket_form_id").val();
+  var ticketFormField = document.querySelector("#request_ticket_form_id");
+  if (!ticketFormField) return;
+  var ticketForm = ticketFormField.value;
 
   // 🚩 CHANGE THIS: Update the ticket form ID if needed.
   if (ticketForm == 73376) {
-    // List of elements to hide/show based on user interaction
+    // List of element selectors to hide/show based on user interaction
     var elementsToToggle = [
       // Your Custom Fields
       "#request_custom_fields_16718854854034",
@@ -722,12 +724,23 @@ $(document).ready(function () {
       "input[type='submit']"
     ];
 
-    var attachmentFormField = $("label[for='request-attachments']").closest(".form-field");
+    var attachmentFormField = document.querySelector("label[for='request-attachments']");
+    if (attachmentFormField) {
+      attachmentFormField = attachmentFormField.closest(".form-field");
+    }
 
     function toggleFields(show) {
-      $(elementsToToggle.join(", ")).toggle(show);
-      attachmentFormField.toggle(show);
-      $("input[type='submit']").toggle(show);
+      elementsToToggle.forEach(function (selector) {
+        document.querySelectorAll(selector).forEach(function (el) {
+          el.style.display = show ? "" : "none";
+        });
+      });
+      if (attachmentFormField) {
+        attachmentFormField.style.display = show ? "" : "none";
+      }
+      document.querySelectorAll("input[type='submit']").forEach(function (el) {
+        el.style.display = show ? "" : "none";
+      });
     }
 
     // Define custom field IDs and trigger values
@@ -739,37 +752,57 @@ $(document).ready(function () {
     
     const messageContainerId = "my-custom-message";
 
-    // Monitor changes on both dropdown fields
-    $(`#${customFieldA_id}, #${customFieldB_id}`).change(function () {
-      var customFieldA_val = $(`#${customFieldA_id}`).val();
-      var customFieldB_val = $(`#${customFieldB_id}`).val();
+    function handleDropdownChange() {
+      var customFieldA_el = document.querySelector("#" + customFieldA_id);
+      var customFieldB_el = document.querySelector("#" + customFieldB_id);
+      if (!customFieldA_el || !customFieldB_el) return;
+
+      var customFieldA_val = customFieldA_el.value;
+      var customFieldB_val = customFieldB_el.value;
       
       // Check both conditions using a logical AND (&&)
       if (customFieldA_triggerValues.includes(customFieldA_val) && customFieldB_triggerValues.includes(customFieldB_val)) {
-        if ($(`#${messageContainerId}`).length === 0) {
-          $(`#${customFieldB_id}_hint`).after(`
-            <div id="${messageContainerId}">
-              <p>Please reach out to your reseller for product support. More information can be found in 
-                <a href='https://support.fairphone.com/hc/en-us/articles/16674972235537-Murena-Fairphone-in-the-USA' target='_blank'>
-                  the support article
-                </a>.
-              </p>
-              <button id="yes-button" type="button">Yes</button>
-            </div>
-          `);
+        var messageEl = document.querySelector("#" + messageContainerId);
+        if (!messageEl) {
+          var hintEl = document.querySelector("#" + customFieldB_id + "_hint");
+          if (hintEl) {
+            hintEl.insertAdjacentHTML("afterend", `
+              <div id="${messageContainerId}">
+                <p>Please reach out to your reseller for product support. More information can be found in 
+                  <a href='https://support.fairphone.com/hc/en-us/articles/16674972235537-Murena-Fairphone-in-the-USA' target='_blank'>
+                    the support article
+                  </a>.
+                </p>
+                <button id="yes-button" type="button">Yes</button>
+              </div>
+            `);
+          }
         }
         toggleFields(false);
-        $(`#${messageContainerId}`).show();
+        var msg = document.querySelector("#" + messageContainerId);
+        if (msg) msg.style.display = "";
       } else {
         toggleFields(true);
-        $(`#${messageContainerId}`).hide();
+        var msg = document.querySelector("#" + messageContainerId);
+        if (msg) msg.style.display = "none";
       }
-    }).trigger("change");
+    }
 
-    // The Yes button redirects to the article
-    $(document).on("click", "#yes-button", function () {
-      window.location.href = "https://support.fairphone.com/hc/en-us/articles/16674972235537-Murena-Fairphone-in-the-USA";
-      toggleFields(false);
+    // Monitor changes on both dropdown fields
+    var fieldA = document.querySelector("#" + customFieldA_id);
+    var fieldB = document.querySelector("#" + customFieldB_id);
+    if (fieldA) fieldA.addEventListener("change", handleDropdownChange);
+    if (fieldB) fieldB.addEventListener("change", handleDropdownChange);
+
+    // Initial trigger
+    handleDropdownChange();
+
+    // The Yes button redirects to the article (event delegation)
+    document.addEventListener("click", function (e) {
+      if (e.target && e.target.matches("#yes-button")) {
+        window.location.href = "https://support.fairphone.com/hc/en-us/articles/16674972235537-Murena-Fairphone-in-the-USA";
+        toggleFields(false);
+      }
     });
   }
 });
@@ -837,9 +870,11 @@ $(document).ready(function () {
 
 (function () {
   function toggleSection(trigger) {
+    console.log("toggleSection");
+    console.log(trigger);
     var targetSelector = trigger.getAttribute('data-bs-target');
     var target = targetSelector ? document.querySelector(targetSelector) : null;
-    if (!target) return;
+    if (!target) {console.log(targetSelector);console.log("target not found");return;}
 
     var isOpen = target.classList.toggle('show');
     trigger.classList.toggle('collapsed', !isOpen);

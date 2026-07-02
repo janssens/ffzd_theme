@@ -3,8 +3,8 @@
   - Burger <-> croix : pur CSS (checkbox hack), pas de JS
   - Comportement scroll (hide/sticky/bordure) : voir script.js
   - L'input checkbox doit rester le premier enfant de .site-header-inner
-    pour que les sélecteurs de fratrie (~) fonctionnent sur .site-nav
-    ET .site-header-actions.
+    pour que les sélecteurs de fratrie (~) fonctionnent sur .site-header-left
+    (qui contient .site-nav) ET .site-header-actions.
 --}}
 <header class="site-header" id="site-header">
   <div class="site-header-inner">
@@ -16,36 +16,38 @@
       aria-hidden="true"
     >
 
-    <a href="{{help_center.url}}" class="site-header-logo" aria-label="{{help_center.name}}">
-      <span class="site-header-logo-mark" aria-hidden="true"></span>
-    </a>
+    <div class="site-header-left">
+      <a href="{{help_center.url}}" class="site-header-logo" aria-label="{{help_center.name}}">
+        <span class="site-header-logo-mark" aria-hidden="true"></span>
+      </a>
 
-    <nav class="site-nav" id="site-nav" aria-label="{{t 'main_navigation'}}">
-      <ul class="site-nav-list">
-        <li class="site-nav-item">
-          <a href="https://www.fairphone.com/" class="site-nav-link">Shop</a>
-        </li>
-        <li class="site-nav-item">
-          <a href="https://www.fairphone.com/about-us" class="site-nav-link">About</a>
-        </li>
-        <li class="site-nav-item">
-          <a href="https://www.fairphone.com/stories" class="site-nav-link">Fairphone Stories</a>
-        </li>
-      </ul>
+      <nav class="site-nav" id="site-nav" aria-label="{{t 'main_navigation'}}">
+        <ul class="site-nav-list">
+          <li class="site-nav-item">
+            <a href="https://www.fairphone.com/" class="site-nav-link">Shop</a>
+          </li>
+          <li class="site-nav-item">
+            <a href="https://www.fairphone.com/about-us" class="site-nav-link">About</a>
+          </li>
+          <li class="site-nav-item">
+            <a href="https://www.fairphone.com/stories" class="site-nav-link">Fairphone Stories</a>
+          </li>
+        </ul>
 
-      {{!-- Liens secondaires : repris en bas du menu plein écran mobile --}}
-      <ul class="site-nav-list site-nav-list--secondary">
-        <li class="site-nav-item">
-          <a href="https://www.fairphone.com/keep-club-fairphone" class="site-nav-link site-nav-link--secondary">Keep Club</a>
-        </li>
-        <li class="site-nav-item">
-          <a href="https://www.fairphone.com/business" class="site-nav-link site-nav-link--secondary">Business</a>
-        </li>
-        <li class="site-nav-item">
-          <a href="{{help_center.url}}" class="site-nav-link site-nav-link--secondary">Support</a>
-        </li>
-      </ul>
-    </nav>
+        {{!-- Liens secondaires : repris en bas du menu plein écran mobile --}}
+        <ul class="site-nav-list site-nav-list--secondary">
+          <li class="site-nav-item">
+            <a href="https://www.fairphone.com/keep-club-fairphone" class="site-nav-link site-nav-link--secondary">Keep Club</a>
+          </li>
+          <li class="site-nav-item">
+            <a href="https://www.fairphone.com/business" class="site-nav-link site-nav-link--secondary">Business</a>
+          </li>
+          <li class="site-nav-item">
+            <a href="{{help_center.url}}" class="site-nav-link site-nav-link--secondary">Support</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
 
     <div class="site-header-actions">
 
