@@ -206,7 +206,7 @@
                     {{/each}}
                   
                   {{else}}
-                  {{#each (slice articles to=(eval ../../settings.repair_phone_max_artcls "+" 0))}}
+                  {{#each (slice articles to=(../../settings.repair_phone_max_artcls))}}
 <li {{#if promoted}} class="article-promoted" {{/if}}>
                       <article>
                         <header>
