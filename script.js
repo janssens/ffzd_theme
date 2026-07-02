@@ -773,6 +773,98 @@ $(document).ready(function () {
     });
   }
 });
+// Handles: hiding when scrolling down / sticking when scrolling up / border starting at 1px
+// + opening the user menu (the hamburger icon itself is pure CSS)
+(function () {
+  var header = document.getElementById('site-header');
+  if (!header) return;
+
+  var lastScrollY = window.scrollY || window.pageYOffset;
+  var ticking = false;
+
+  function updateHeader() {
+    var currentScrollY = window.scrollY || window.pageYOffset;
+
+    // Bordure visible dès 1px de scroll
+    header.classList.toggle('is-scrolled', currentScrollY > 0);
+
+    if (currentScrollY <= 0) {
+      // Sommet de la page : toujours visible
+      header.classList.remove('is-hidden');
+    } else if (currentScrollY > lastScrollY) {
+      // Scroll vers le bas : on masque
+      header.classList.add('is-hidden');
+    } else if (currentScrollY < lastScrollY) {
+      // Scroll vers le haut : on réaffiche (sticky)
+      header.classList.remove('is-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener(
+    'scroll',
+    function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  // --- Menu utilisateur (dropdown natif Zendesk) ---
+  var userInfo = document.querySelector('.user-info');
+  var userToggle = document.getElementById('user-dropdown-toggle');
+
+  if (userInfo && userToggle) {
+    userToggle.addEventListener('click', function () {
+      var isOpen = userInfo.classList.toggle('is-open');
+      userToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!userInfo.contains(event.target)) {
+        userInfo.classList.remove('is-open');
+        userToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+})();
+// Replaces the Bootstrap “collapse” behavior (data-bs-toggle) of the footer,
+// which is not available in Zendesk. Independent panels (not a strict accordion).
+
+(function () {
+  function toggleSection(trigger) {
+    var targetSelector = trigger.getAttribute('data-bs-target');
+    var target = targetSelector ? document.querySelector(targetSelector) : null;
+    if (!target) return;
+
+    var isOpen = target.classList.toggle('show');
+    trigger.classList.toggle('collapsed', !isOpen);
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  var sections = document.querySelectorAll('.fp_footer_map_navigation');
+
+  sections.forEach(function (section) {
+    var trigger = section.querySelector('[data-bs-toggle="collapse"]');
+    var heading = section.querySelector('.fp_h6');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', function () {
+      toggleSection(trigger);
+    });
+
+    // Expands the clickable area to include the entire title (accessibility / mobile usability)
+    if (heading) {
+      heading.addEventListener('click', function () {
+        toggleSection(trigger);
+      });
+    }
+  });
+})();
 
 /* End extra code - Combined field logic for two fields */
 
