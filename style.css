@@ -1058,7 +1058,6 @@ body .dropdown-menu > li > a {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 100vh;
   background-color: #ffffff;
   visibility: hidden;
   opacity: 0;
@@ -3671,6 +3670,49 @@ code, kbd, samp {
 .c-category__content-tree .article-list > li > article > header .search-result-meta-container {
   grid-column: 1/13;
 }
+.category-page .section.section--with-image {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .category-page .section.section--with-image {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+.category-page .section-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  order: 0;
+}
+.category-page .section-image-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.category-page .section-content {
+  min-width: 0;
+  order: 1;
+}
+.category-page .section--no-image .section-content {
+  order: 0;
+}
+@media (min-width: 768px) {
+  .category-page .section--img-right .section-image {
+    order: 1;
+  }
+  .category-page .section--img-right .section-content {
+    order: 0;
+  }
+}
+
 body .user-info [role=button]::before {
   display: inline-block;
   content: "Welcome ";

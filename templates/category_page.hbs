@@ -163,51 +163,62 @@
           <div class="c-category__content-tree">
             {{#each sections}}
               {{#is id 31680016190610}}{{!-- Repair guides (phones) --}}
-                coucou  Repair guides (phones)
-                [[ {{../settings.repair_phone_max_artcls}} ]]
                 {{#if articles}}
-                  <section class="section" id="section_{{ id }}">
-                    <h2><a href="{{url}}">{{name}}</a>  </h2>
-                    <ul class="article-list">
-                      {{#each articles }}
-                        <li {{#if promoted}} class="article-promoted" {{/if}}>
-                          <article>
-                            <header>
-                              <div class="search-result-title-container">
-                                <h2 class="search-result-title">
-                                  <a href="{{url}}">
-                                    {{#if promoted}}
-                                    <span data-title="{{t 'promoted'}}">★</span>
-                                    {{/if}}
-                                    {{title}}
+                  <section class="section {{#if ../settings.repair_phone_show_img}}section--with-image section--img-{{../settings.repair_phone_img_pos}}{{else}}section--no-image{{/if}}" id="section_{{ id }}">
+                    {{#if ../settings.repair_phone_show_img}}
+                      <div class="section-image">
+                        <img src="{{../settings.repair_phone_img}}" alt="" class="section-image-img">
+                      </div>
+                    {{/if}}
+                    <div class="section-content">
+                      <h2><a href="{{url}}">{{name}}</a>  </h2>
+                      <ul class="article-list">
+                        {{#each articles }}
+                          <li {{#if promoted}} class="article-promoted" {{/if}}>
+                            <article>
+                              <header>
+                                <div class="search-result-title-container">
+                                  <h2 class="search-result-title">
+                                    <a href="{{url}}">
+                                      {{#if promoted}}
+                                      <span data-title="{{t 'promoted'}}">★</span>
+                                      {{/if}}
+                                      {{title}}
+                                    </a>
+                                  </h2>
+                                </div>
+                                <div class="search-result-btn-container">
+                                  <a href="{{url}}" class="">
+                                    {{t "read_guide"}} →
                                   </a>
-                                </h2>
-                              </div>
-                              <div class="search-result-btn-container">
-                                <a href="{{url}}" class="">
-                                  {{t "read_guide"}} →
-                                </a>
-                              </div>
-                              <div class="search-result-meta-container">
-                                <nav>
-                                  <ol class="search-result-breadcrumbs">
-                                    <li data-type="article"><span>article</span></li>
-                                    {{#each path_steps}}
-                                    <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
-                                    {{/each}}
-                                    <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
-                                  </ol>
-                                </nav>
-                              </div>
-                            </header>
-                          </article>
-                        </li>
-                      {{/each}}
-                    </ul>
+                                </div>
+                                <div class="search-result-meta-container">
+                                  <nav>
+                                    <ol class="search-result-breadcrumbs">
+                                      <li data-type="article"><span>article</span></li>
+                                      {{#each path_steps}}
+                                      <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
+                                      {{/each}}
+                                      <li class="meta-data">{{t "updated" }}&nbsp;{{date created_at timeago=true}}</li>
+                                    </ol>
+                                  </nav>
+                                </div>
+                              </header>
+                            </article>
+                          </li>
+                        {{/each}}
+                      </ul>
+                    </div>
                   </section>
+                  <div class="links" {{#is ../settings.repair_phone_max_artcls -1}}style="display:none"{{/is}}>
+                    <a class="" href="{{url}}">{{../settings.repair_phone_all_lbl}}</a>
+                    {{#if ../settings.repair_phone_ext_link_url}}
+                      <a href="{{../settings.repair_phone_ext_link_url}}">{{../settings.repair_phone_ext_link_lbl}}</a>
+                    {{/if}}
+                  </div>
                   <script>
                     document
-                    .querySelectorAll('#section_{{ id }} .article-list li')
+                    .querySelectorAll('#section_{{ id }} .article-list > li')
                     .forEach((el, i) => {
                       if (i >= {{../settings.repair_phone_max_artcls}} ) el.hidden = true;
                     });
