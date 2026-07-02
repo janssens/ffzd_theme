@@ -4,7 +4,7 @@
   - Comportement scroll (hide/sticky/bordure) : voir script.js
   - L'input checkbox doit rester le premier enfant de .site-header-inner
     pour que les sélecteurs de fratrie (~) fonctionnent sur .site-header-left
-    (qui contient .site-nav) ET .site-header-actions.
+    (qui contient à la fois .site-nav et le burger .nav-toggle).
 --}}
 <header class="site-header" id="site-header">
   <div class="site-header-inner">
@@ -17,6 +17,10 @@
     >
 
     <div class="site-header-left">
+      <label for="nav-toggle" class="nav-toggle" aria-label="{{t 'toggle_navigation'}}">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </label>
+
       <a href="{{help_center.url}}" class="site-header-logo" aria-label="{{help_center.name}}">
         <span class="site-header-logo-mark" aria-hidden="true"></span>
       </a>
@@ -82,10 +86,6 @@
           <span class="visually-hidden">{{t 'sign_in'}}</span>
         {{/link}}
       {{/if}}
-
-      <label for="nav-toggle" class="nav-toggle" aria-label="{{t 'toggle_navigation'}}">
-        <span class="nav-toggle-icon" aria-hidden="true"></span>
-      </label>
 
     </div>
   </div>
