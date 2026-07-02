@@ -1,22 +1,8 @@
 {{!--
   PRODUCTION TEMPLATE: home_page.hbs
   Source: actual_theme/templates/home_page.hbs
-
-  REMOVED FROM COPENHAGEN:
-  - hero section with search icon SVG and instant search
-  - container with knowledge-base section, categories blocks-list, promoted_articles
-  - community section with join_conversation link and community-image
-  - recent_activity section
-
-  ADDED FROM PRODUCTION:
-  - Hero/search section with Fairphone branding (c-simple-search)
-  - Issue diagnose CTA section with b2x.com links
-  - Knowledge base categories in 2x2 grid with icons
-  - Contact support section with chat and email cards
-  - Zingtree script
-  - NOTE: CSS styles moved to SCSS files (buttons, search, home-articles, home)
 --}}
-
+<div class="home-page">
 
 {{!-- ============================================
   SECTION 1: HERO / SEARCH
@@ -167,6 +153,8 @@
     </div>
   </div>
 </section>
+
+</div>
 
 {{!-- ADDED FROM PRODUCTION: Zingtree Script (Preserved from Legacy) --}}
 <script src="https://zingtree.com/deploy/popup-modal.js"></script>

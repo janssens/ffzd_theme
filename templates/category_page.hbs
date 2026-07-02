@@ -165,13 +165,13 @@
               {{#is id 31680016190610}}{{!-- Repair guides (phones) --}}
                 {{#if articles}}
                   <section class="section {{#if ../settings.repair_phone_show_img}}section--with-image section--img-{{../settings.repair_phone_img_pos}}{{else}}section--no-image{{/if}}" id="section_{{ id }}">
+                    <h2><a href="{{url}}">{{name}}</a>  </h2>
                     {{#if ../settings.repair_phone_show_img}}
                       <div class="section-image">
                         <img src="{{../settings.repair_phone_img}}" alt="" class="section-image-img">
                       </div>
                     {{/if}}
                     <div class="section-content">
-                      <h2><a href="{{url}}">{{name}}</a>  </h2>
                       <ul class="article-list">
                         {{#each articles }}
                           <li {{#if promoted}} class="article-promoted" {{/if}}>
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="search-result-btn-container">
                                   <a href="{{url}}" class="">
-                                    {{t "read_guide"}} →
+                                    read guide → {{!-- todo: use translate here --}}
                                   </a>
                                 </div>
                                 <div class="search-result-meta-container">
@@ -208,14 +208,16 @@
                           </li>
                         {{/each}}
                       </ul>
+                      <div class="links" {{#is ../settings.repair_phone_max_artcls -1}}style="display:none"{{/is}}>
+                        <a class="c-btn-secondary" href="{{url}}">{{../settings.repair_phone_all_lbl}}</a>
+                        {{#if ../settings.repair_phone_ext_link_url}}
+                          <a class="extra" href="{{../settings.repair_phone_ext_link_url}}">{{../settings.repair_phone_ext_link_lbl}}</a>
+                        {{/if}}
+                      </div>
                     </div>
                   </section>
-                  <div class="links" {{#is ../settings.repair_phone_max_artcls -1}}style="display:none"{{/is}}>
-                    <a class="c-btn-secondary" href="{{url}}">{{../settings.repair_phone_all_lbl}}</a>
-                    {{#if ../settings.repair_phone_ext_link_url}}
-                      <a class="extra" href="{{../settings.repair_phone_ext_link_url}}">{{../settings.repair_phone_ext_link_lbl}}</a>
-                    {{/if}}
-                  </div>
+                  {{#is ../settings.repair_phone_max_artcls -1}}
+                  {{else}}
                   <script>
                     document
                     .querySelectorAll('#section_{{ id }} .article-list > li')
@@ -223,6 +225,7 @@
                       if (i >= {{../settings.repair_phone_max_artcls}} ) el.hidden = true;
                     });
                   </script>
+                  {{/is}}
                 {{/if}}
               {{else}}
               <section class="section" id="section_{{ id }}">
@@ -247,7 +250,7 @@
                           </div>
                           <div class="search-result-btn-container">
                             <a href="{{url}}" class="">
-                              {{t "read_guide"}} →
+                                    read guide → {{!-- todo: use translate here --}}
                             </a>
                           </div>
                           <div class="search-result-meta-container">
