@@ -667,25 +667,6 @@
 /* Start extra code - Combined field logic for two fields */
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Styles for the Yes button
-  document.head.insertAdjacentHTML("beforeend", `
-    <style>
-      #yes-button {
-        font-weight: bold;
-        color: white;
-        background-color: #00786E;
-        border-radius: 20px;
-        border: 2px solid #00786E;
-        cursor: pointer;
-      }
-
-      /* Hover effects for button */
-      #yes-button:hover {
-        background-color: #E0FD6E;
-        color: #00786E;
-      }
-    </style>
-  `);
 
   // Get the selected ticket form ID
   var ticketFormField = document.querySelector("#request_ticket_form_id");
@@ -709,7 +690,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "#request_custom_fields_16718854999058",
       "#request_custom_fields_16718854999058_label",
       "#request_custom_fields_16718854999058 + a.nesty-input",
-      
+
       // Subject and Description
       "#request_subject",
       "#request_subject_label",
@@ -749,7 +730,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const customFieldB_id = "request_custom_fields_16718860098194";
     const customFieldB_triggerValues = ["us_reseller____ice", "us_reseller____verizon"];
-    
+
     const messageContainerId = "my-custom-message";
 
     function handleDropdownChange() {
@@ -759,7 +740,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       var customFieldA_val = customFieldA_el.value;
       var customFieldB_val = customFieldB_el.value;
-      
+
       // Check both conditions using a logical AND (&&)
       if (customFieldA_triggerValues.includes(customFieldA_val) && customFieldB_triggerValues.includes(customFieldB_val)) {
         var messageEl = document.querySelector("#" + messageContainerId);
@@ -806,75 +787,75 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-// Handles: hiding when scrolling down / sticking when scrolling up / border starting at 1px
-// + opening the user menu (the hamburger icon itself is pure CSS)
-(function () {
-  var header = document.getElementById('site-header');
-  if (!header) return;
 
-  var lastScrollY = window.scrollY || window.pageYOffset;
-  var ticking = false;
+    // Handles: hiding when scrolling down / sticking when scrolling up / border starting at 1px
+    // + opening the user menu (the hamburger icon itself is pure CSS)
+document.addEventListener("DOMContentLoaded", function () {
+var header = document.getElementById('site-header');
+      if (!header) return;
 
-  function updateHeader() {
-    var currentScrollY = window.scrollY || window.pageYOffset;
+      var lastScrollY = window.scrollY || window.pageYOffset;
+      var ticking = false;
 
-    // Bordure visible dès 1px de scroll
-    header.classList.toggle('is-scrolled', currentScrollY > 0);
+      function updateHeader() {
+        var currentScrollY = window.scrollY || window.pageYOffset;
 
-    if (currentScrollY <= 0) {
-      // Sommet de la page : toujours visible
-      header.classList.remove('is-hidden');
-    } else if (currentScrollY > lastScrollY) {
-      // Scroll vers le bas : on masque
-      header.classList.add('is-hidden');
-    } else if (currentScrollY < lastScrollY) {
-      // Scroll vers le haut : on réaffiche (sticky)
-      header.classList.remove('is-hidden');
-    }
+        // Bordure visible dès 1px de scroll
+        header.classList.toggle('is-scrolled', currentScrollY > 0);
 
-    lastScrollY = currentScrollY;
-    ticking = false;
-  }
+        if (currentScrollY <= 0) {
+          // Sommet de la page : toujours visible
+          header.classList.remove('is-hidden');
+        } else if (currentScrollY > lastScrollY) {
+          // Scroll vers le bas : on masque
+          header.classList.add('is-hidden');
+        } else if (currentScrollY < lastScrollY) {
+          // Scroll vers le haut : on réaffiche (sticky)
+          header.classList.remove('is-hidden');
+        }
 
-  window.addEventListener(
-    'scroll',
-    function () {
-      if (!ticking) {
-        window.requestAnimationFrame(updateHeader);
-        ticking = true;
+        lastScrollY = currentScrollY;
+        ticking = false;
       }
-    },
-    { passive: true }
-  );
 
-  // --- Menu utilisateur (dropdown natif Zendesk) ---
-  var userInfo = document.querySelector('.user-info');
-  var userToggle = document.getElementById('user-dropdown-toggle');
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+          }
+        },
+        { passive: true }
+      );
 
-  if (userInfo && userToggle) {
-    userToggle.addEventListener('click', function () {
-      var isOpen = userInfo.classList.toggle('is-open');
-      userToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
+      // --- Menu utilisateur (dropdown natif Zendesk) ---
+      var userInfo = document.querySelector('.user-info');
+      var userToggle = document.getElementById('user-dropdown-toggle');
 
-    document.addEventListener('click', function (event) {
-      if (!userInfo.contains(event.target)) {
-        userInfo.classList.remove('is-open');
-        userToggle.setAttribute('aria-expanded', 'false');
+      if (userInfo && userToggle) {
+        userToggle.addEventListener('click', function () {
+          var isOpen = userInfo.classList.toggle('is-open');
+          userToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        document.addEventListener('click', function (event) {
+          if (!userInfo.contains(event.target)) {
+            userInfo.classList.remove('is-open');
+            userToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
       }
-    });
-  }
-})();
+});
+
+
 // Replaces the Bootstrap “collapse” behavior (data-bs-toggle) of the footer,
 // which is not available in Zendesk. Independent panels (not a strict accordion).
-
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
   function toggleSection(trigger) {
-    console.log("toggleSection");
-    console.log(trigger);
     var targetSelector = trigger.getAttribute('data-bs-target');
     var target = targetSelector ? document.querySelector(targetSelector) : null;
-    if (!target) {console.log(targetSelector);console.log("target not found");return;}
+    if (!target) return;
 
     var isOpen = target.classList.toggle('show');
     trigger.classList.toggle('collapsed', !isOpen);
@@ -882,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var sections = document.querySelectorAll('.fp_footer_map_navigation');
-
+  
   sections.forEach(function (section) {
     var trigger = section.querySelector('[data-bs-toggle="collapse"]');
     var heading = section.querySelector('.fp_h6');
@@ -899,7 +880,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
-})();
+});
+
 
 /* End extra code - Combined field logic for two fields */
-

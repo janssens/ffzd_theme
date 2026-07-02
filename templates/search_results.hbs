@@ -258,7 +258,7 @@ Source: actual_theme/templates/search_results.hbs
                                     </div>
                                     <div class="search-result-btn-container">
                                         <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}} class="">
-                                            {{t "read "}} {{ type }} →
+                                            {{t "read "}} {{#is type 'article'}}&nbsp;{{t "guide" }}{{/is}} →
                                         </a>
                                     </div>
                                     <div class="search-result-meta-container">
@@ -430,7 +430,6 @@ Source: actual_theme/templates/search_results.hbs
                     {{/if}}
                     {{pagination}}
                 </section>
-                
             </div>
     </div>
 </section>
